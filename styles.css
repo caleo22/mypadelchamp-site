@@ -1,0 +1,419 @@
+/*
+ * Feuille unique du site de conformité MyPadelChamp.
+ * Trame : docs/design/site-web/00-trame.md. Fiche : docs/design/site-web/FICHE-CONFORMITE.md.
+ *
+ * Toute couleur vient de src/constants/theme.ts, jamais approchée : le navy est #122036 et rien
+ * d'autre. Une variante d'un chiffre près, inventée, a été rattrapée le 2026-07-29 : la valeur
+ * fautive n'est pas recopiée ici, sinon le contrôle de l'assertion 5 la trouverait dans ce
+ * commentaire et crierait à chaque passage. Toute taille vient de l'échelle Type du même
+ * fichier, plancher 12 px.
+ *
+ * Aucune ressource externe : les polices sont servies depuis polices/, le grain est un SVG
+ * inline en data URI. C'est ce qui rend vraie la phrase « aucun cookie ni traceur » de la
+ * politique de confidentialité.
+ */
+
+/* Polices de l'app, sous-ensemblées sur le latin français (35 Ko au total).
+   DM Sans pour le corps, Barlow Condensed pour les titres : FontFamily de theme.ts. */
+@font-face {
+  font-family: 'DM Sans';
+  src: url('polices/DMSans-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DM Sans';
+  src: url('polices/DMSans-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('polices/BarlowCondensed-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+/* L'italique porte le titre de l'affiche de saison, comme `tileHero` dans l'app
+   (MPCText.tsx:37 = FontFamily.headingItalic). Sous-ensemblée le 2026-07-30 avec la
+   recette exacte des trois autres : 175 glyphes, latin français, 9,1 Ko. Le cadratin
+   n'est pas dans le jeu, la police ne peut donc pas en dessiner un. */
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('polices/BarlowCondensed-BoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* Jetons de theme.ts, Colors.light */
+  --texte: #122036;
+  --fond: #f1f5fc;
+  --surface: #ffffff;
+  --surface-selection: #eaf1ff;
+  --primaire: #1366f0;
+  --succes: #16c172;
+  /* Colors.light.borderSubtle : le filet anti-slop, jamais une ligne pleine */
+  --filet: rgba(18, 32, 54, 0.08);
+  /* Terrains.championnat.gradient */
+  --champ-haut: #144af2;
+  --champ-bas: #0330d8;
+  /* Signature.balle : le jaune de la plaque de dates, War Room et affiche */
+  --balle: #cfe34a;
+  /* Radius.card et les deux ombres anti-slop de Shadows (noir pur, opacité <= 0.08) */
+  --rayon-carte: 16px;
+  --ombre-carte: 0 4px 10px rgba(0, 0, 0, 0.03);
+  --ombre-affiche: 0 8px 20px rgba(0, 0, 0, 0.06);
+  /* Échelle Type */
+  --t-display: 40px;
+  --t-tile-hero: 26px;
+  --t-titre-ecran: 21px;
+  --t-label-section: 18px;
+  --t-base: 14px;
+  --t-body: 13.5px;
+  --t-caption: 12px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--texte);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: var(--t-body);
+  line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Le grain de l'app, posé sur tout l'écran. Sans lui les aplats se lisent comme génériques
+   (leçon mesurée le 2026-07-29). Il ne doit jamais intercepter un clic. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* ===== Ossature ===== */
+
+.page {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 56px;
+}
+
+h1, h2, h3 {
+  font-family: 'Barlow Condensed', 'DM Sans', system-ui, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  /* lineHeight jamais inférieur à fontSize : les accents seraient rognés (leçon du 27/07). */
+  line-height: 1.12;
+  margin: 0;
+}
+
+h1 { font-size: var(--t-display); }
+h2 { font-size: var(--t-tile-hero); margin-top: 40px; }
+h3 { font-size: var(--t-label-section); margin-top: 28px; }
+
+p { margin: 12px 0 0; }
+p:first-child { margin-top: 0; }
+
+a { color: var(--primaire); text-decoration: underline; text-underline-offset: 2px; }
+
+/* ===== L'affiche de saison =====
+   Report de la forme B2 de `src/app/championnat/offre.tsx`, arbitrée par Derek le
+   2026-07-27 : l'écran EST l'objet qu'il vend. Le site montrait un fronton de marque
+   et un titre nu sur fond clair ; il porte désormais la même affiche que l'app, aux
+   mêmes valeurs (dégradé Terrains.championnat, bordure de court, plaque de dates au
+   jaune Signature.balle). Rien n'est inventé, tout est repris de theme.ts.
+
+   L'axe reste centré, contrairement à l'app qui aligne à gauche : c'est le seul écart,
+   il tient au blason et au wordmark, qui n'existent pas sur l'écran d'offre. */
+
+.affiche {
+  position: relative;
+  /* Enfant direct du body, qui n'a aucun padding : PAS de marge négative ici. Celle de
+     l'ancien `.fronton` était écrite pour un enfant de `.page` et faisait déborder la
+     page de 20 px à droite, à toutes les largeurs (mesuré de 320 à 1024 le 30/07). */
+  margin: 0 0 28px;
+  padding: 40px 24px 34px;
+  background: linear-gradient(160deg, var(--champ-haut), var(--champ-bas));
+  color: var(--surface);
+  text-align: center;
+  overflow: hidden;
+  box-shadow: var(--ombre-affiche);
+}
+
+/* Bordure de court seule, sans médiane : l'affiche pose du texte pleine largeur, que le
+   filet couperait en deux. Valeurs de `courtBorder` (offre.tsx:262) : 1,2 px à 16 %. */
+.affiche::after {
+  content: '';
+  position: absolute;
+  /* Épaisseur et opacité de l'app ; le retrait passe de 9 à 14 px, parce qu'ici l'affiche est
+     un bandeau pleine largeur et non une carte de 360 px : à 9 px le filet se lisait comme un
+     liseré collé au bord (vu au rendu du 30/07 à 1024 px). */
+  inset: 14px;
+  border: 1.2px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.affiche img.blason {
+  display: block;
+  width: 88px;
+  height: auto;
+  margin: 0 auto 16px;
+  /* Le SVG est navy : sur l'affiche il se pose en blanc. */
+  filter: brightness(0) invert(1);
+}
+
+/* Le wordmark identifie la marque, il ne doit pas dominer le titre de la saison : sur
+   l'écran d'offre de l'app, le titre est seul et il EST le héros. Ramené de 300 à 220 px
+   pour que la hiérarchie soit la même ici (vu au rendu du 30/07, où il l'écrasait). */
+.affiche img.wordmark {
+  display: block;
+  width: min(220px, 62%);
+  height: auto;
+  margin: 0 auto;
+  filter: brightness(0) invert(1);
+}
+
+/* Variant `kpiLabel` : DM Sans 12 px, interlettrage 0,4, capitales. L'app le pose à 72 %
+   de blanc, ce qui donne 4,0:1 sur le bleu du haut ; monté à 86 % pour tenir 5,1:1. */
+.affiche .kicker {
+  margin: 26px 0 0;
+  font-size: var(--t-caption);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+/* Variant `tileHero` : Barlow Condensed Bold Italic 26 px, interlettrage 0,26, capitales.
+   L'interligne reste au-dessus de la taille, sinon les accents des capitales sont rognés
+   (leçon du 27/07, et l'app pose 27 pour 26). */
+.affiche h1 {
+  margin: 6px 0 0;
+  font-family: 'Barlow Condensed', 'DM Sans', system-ui, sans-serif;
+  font-style: italic;
+  font-size: var(--t-tile-hero);
+  line-height: 1.06;
+  letter-spacing: 0.26px;
+  text-transform: uppercase;
+  color: var(--surface);
+}
+
+/* La plaque de `offre.tsx:276` : fond navy à 62 %, filet blanc à 16 %, rayon 9.
+   Un écart assumé sur la seule valeur de fond : l'app y écrit un navy littéral qui ne vient
+   d'aucun jeton de theme.ts, et il n'est pas recopié ici, sinon le contrôle de l'assertion 5
+   le trouverait dans ce commentaire et crierait à chaque passage. Le site dérive du navy `--texte`
+   (#122036), comme l'exige l'assertion 5 de la fiche. Les deux sont des navy à 62 % sur
+   un bleu profond, l'écart ne se voit pas ; c'est l'app qui devrait rentrer dans le rang. */
+.affiche .plaque {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 8px 12px;
+  background: rgba(18, 32, 54, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 9px;
+}
+
+.affiche .plaque-dates {
+  margin: 0;
+  font-family: 'Barlow Condensed', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: var(--t-base);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--balle);
+}
+
+.affiche .plaque-ligne {
+  margin: 2px 0 0;
+  font-size: var(--t-caption);
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* L'accroche a quitté l'affiche : elle décrit l'entreprise, ce que Stripe demande, et
+   elle se lit mieux en noir sur le fond clair qu'en blanc sur le bleu. */
+.accroche {
+  margin: 0 0 4px;
+  font-size: var(--t-base);
+}
+
+/* ===== En-tête des pages secondaires ===== */
+
+.entete {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 0 8px;
+}
+
+.entete img {
+  width: 34px;
+  height: auto;
+}
+
+.entete a {
+  font-family: 'Barlow Condensed', system-ui, sans-serif;
+  font-size: var(--t-label-section);
+  text-transform: uppercase;
+  color: var(--texte);
+  text-decoration: none;
+}
+
+/* ===== Cartes ===== */
+
+/* Rayon et ombre repris à l'exact de `Radius.card` (16) et `Shadows.light` : le site
+   posait 14 px et une ombre à 0,05 de son cru, l'app pose 16 px et 0 4px 10px / 0,03. */
+.carte {
+  background: var(--surface);
+  border-radius: var(--rayon-carte);
+  padding: 20px;
+  margin-top: 16px;
+  /* Ombre anti-slop : noir pur, opacité sous 0.08, jamais de teinte bleue. */
+  box-shadow: var(--ombre-carte);
+}
+
+/* La marge basse est portée par le titre, jamais retirée au premier paragraphe : sans elle le
+   texte touche le titre (vu au rendu du 2026-07-29 sur la première carte de l'accueil).
+   Seul le PREMIER titre de la carte perd sa marge haute : l'annuler pour tous collait les
+   sous-titres au contenu qui les précède (même rendu, page confidentialité). */
+.carte h2, .carte h3 { margin-bottom: 14px; }
+.carte > h2:first-child, .carte > h3:first-child { margin-top: 0; }
+
+/* Un fait : son intitulé en gras, sa suite dans la même phrase. Les faits sont séparés
+   par le filet `borderSubtle`, comme `faitSuivant` dans l'app (offre.tsx:298), et non
+   par un simple blanc : c'est ce qui les fait lire comme une liste de garanties. */
+.fait { margin-top: 0; padding: 9px 0; }
+.fait + .fait { border-top: 1px solid var(--filet); }
+.fait:first-of-type { padding-top: 0; }
+.fait:last-of-type { padding-bottom: 0; }
+.fait b { font-weight: 700; }
+
+/* ===== Le prix ===== */
+
+/* Centré et non aligné sur la ligne de base : le détail fait deux lignes, et une baseline
+   commune le laissait flotter sous le montant. */
+.prix {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.prix .montant {
+  font-family: 'Barlow Condensed', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 1;
+  color: var(--texte);
+}
+
+.prix .detail { flex: 1 1 15em; min-width: 12em; }
+
+.note {
+  margin-top: 14px;
+  font-size: var(--t-caption);
+  color: rgba(18, 32, 54, 0.66);
+}
+
+/* ===== Logos des cartes ===== */
+
+.logos-cartes {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 8px;
+  color: rgba(18, 32, 54, 0.72);
+}
+
+ul, ol { margin: 12px 0 0; padding-left: 22px; }
+li { margin-top: 6px; }
+
+/* ===== Table des mentions ===== */
+
+.mentions {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: var(--t-base);
+}
+
+.mentions th, .mentions td {
+  text-align: left;
+  vertical-align: top;
+  padding: 9px 12px 9px 0;
+  border-bottom: 1px solid var(--surface-selection);
+}
+
+/* Jamais de nowrap : c'est lui qui forçait le tableau à dépasser la carte entre 481 et 560 px
+   de large, et la page défilait en travers (mesuré au rendu du 2026-07-29). Le libellé se
+   replie, ce qui ne coûte rien. */
+.mentions th {
+  font-weight: 700;
+  width: 38%;
+}
+
+.mentions tr:last-child th, .mentions tr:last-child td { border-bottom: none; }
+
+/* Tableau large : il défile dans sa propre boîte, la page ne défile jamais en travers. */
+.defilant { overflow-x: auto; }
+
+/* ===== Jeton non rempli =====
+   Visible exprès, et vérifiable par grep : l'assertion 2 de la fiche interdit la publication
+   tant qu'il en reste un. */
+.jeton {
+  background: var(--surface-selection);
+  border-bottom: 2px solid var(--primaire);
+  padding: 0 4px;
+  font-weight: 700;
+}
+
+/* ===== Pied de page ===== */
+
+.pied {
+  margin-top: 44px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(18, 32, 54, 0.12);
+  font-size: var(--t-caption);
+  color: rgba(18, 32, 54, 0.66);
+}
+
+.pied nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-bottom: 12px;
+  font-size: var(--t-base);
+}
+
+/* ===== Petits écrans ===== */
+
+/* Seuil à 560 px et non 480 : entre les deux, une colonne de libellés et une de valeurs ne
+   tiennent pas dans la carte. Les couples libellé/valeur s'empilent plutôt que de se serrer. */
+/* Au-delà du mobile, le titre de l'affiche passe de `tileHero` (26) à `display` (40) : la
+   même échelle Type, le jeton du dessus. À 26 px sur une bannière de 720 px de large, il se
+   lisait comme une légende sous le wordmark et non comme le titre de la saison. */
+@media (min-width: 561px) {
+  .affiche h1 { font-size: var(--t-display); }
+}
+
+@media (max-width: 560px) {
+  h1 { font-size: 32px; }
+  /* Le titre de l'affiche garde sa taille d'app, il ne suit pas le h1 des autres pages. */
+  .affiche h1 { font-size: var(--t-tile-hero); }
+  .prix .montant { font-size: 44px; }
+  .mentions, .mentions tbody, .mentions tr, .mentions th, .mentions td { display: block; }
+  .mentions th { width: auto; padding-bottom: 0; border-bottom: none; }
+  .mentions td { padding-top: 2px; }
+  /* Une adresse email ou une URL ne doit pas pousser la carte hors de l'écran. */
+  a { overflow-wrap: anywhere; }
+}

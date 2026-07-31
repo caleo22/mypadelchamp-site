@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page introuvable, MyPadelChamp</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="marque/blason.svg" type="image/svg+xml">
+<!--
+  Ajoutée le 2026-07-30. Sans elle, Cloudflare Pages servait l'accueil AVEC un code 200 pour
+  toute adresse inexistante (mesuré : /nexistepas rendait 6 455 octets et le titre de
+  l'accueil). Une adresse fautive affichait donc silencieusement la page de vente, et les
+  moteurs indexaient autant d'accueils que d'URL mortes. Pages sert ce fichier avec le code 404
+  dès qu'il existe à la racine du répertoire publié.
+-->
+</head>
+<body>
+
+<div class="page">
+
+  <div class="entete">
+    <img src="marque/blason.svg" alt="">
+    <a href="index.html">MyPadelChamp</a>
+  </div>
+
+  <h1>Page introuvable</h1>
+  <p>Cette adresse ne correspond à aucune page du site. Elle a peut-être changé, ou le lien qui t'a amené ici est incomplet.</p>
+
+  <section class="carte">
+    <h2>Les pages du site</h2>
+    <ul>
+      <li><a href="index.html">Le championnat fondateur</a>, ce que comprend le pass et son prix</li>
+      <li><a href="mentions-legales.html">Mentions légales</a></li>
+      <li><a href="confidentialite.html">Politique de confidentialité</a></li>
+      <li><a href="suppression-de-compte.html">Supprimer mon compte</a></li>
+    </ul>
+    <p class="note">Si tu cherchais autre chose, écris à <a href="mailto:contact@mypadelchamp.com">contact@mypadelchamp.com</a>.</p>
+  </section>
+
+</div>
+
+</body>
+</html>

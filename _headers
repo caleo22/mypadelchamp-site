@@ -1,0 +1,19 @@
+# En-têtes servis par l'hébergeur. Fichier de configuration, il n'est pas servi lui-même.
+#
+# HSTS volontairement PRUDENT : six mois, sans includeSubDomains et sans preload.
+#   - includeSubDomains couvrirait des sous-domaines qui ne servent pas de HTTP mais dont
+#     dépend l'authentification du service. Une directive capable de la casser ne se pose pas
+#     sans l'avoir vérifiée sous-domaine par sous-domaine.
+#   - preload est irréversible en pratique. Il se demande une fois la valeur d'un an tenue.
+#
+# La politique de sécurité du contenu ci-dessous est celle que le site peut tenir : il ne
+# charge aucun script, aucune police distante, aucune image d'un autre domaine. Elle n'est
+# active que si rien n'injecte de script dans les pages ; le jour où quelque chose en injecte,
+# c'est l'injection qu'il faut retirer, pas la politique.
+
+/*
+  Content-Security-Policy: default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  Strict-Transport-Security: max-age=15552000
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
