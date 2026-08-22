@@ -17,8 +17,10 @@
   1. La base est à Zurich, en Suisse : toute phrase qui localiserait les données dans l'Union
      européenne serait fausse. La formulation fautive n'est pas recopiée ici, sinon le
      contrôle la trouverait dans ce commentaire et crierait à chaque passage.
-  2. Ne jamais déclarer un traitement qui n'a pas lieu : pas de notifications système, pas
-     d'âge collecté, aucun outil de mesure d'audience tiers.
+  2. Ne jamais déclarer un traitement qui n'a pas lieu, et ne jamais taire un traitement qui
+     a lieu. La liste des collectes se re-vérifie contre l'application avant chaque
+     publication : le 22/08 elle taisait l'année de naissance, saisissable dans les réglages,
+     et les notifications système, qui existent depuis le 20/08.
   3. Ne jamais affirmer une base de transfert qui n'a pas été vérifiée à la source. Quand elle
      manque, la page le dit, comme elle le fait pour la messagerie du domaine.
 
@@ -48,18 +50,20 @@
     <h2>Ce que nous collectons</h2>
     <ul>
       <li><b>Ton adresse email.</b> C'est ton seul identifiant de connexion : MyPadelChamp n'utilise pas de mot de passe, tu reçois un lien à chaque connexion.</li>
-      <li><b>Ton profil :</b> ton prénom d'affichage, ton genre, ton côté de préférence, ta zone de jeu.</li>
+      <li><b>Ton profil :</b> ton prénom, ton nom, ton genre, ton côté de préférence, ta zone de jeu.</li>
+      <li><b>Ton année de naissance,</b> si tu la renseignes dans tes réglages. Elle n'est affichée nulle part dans l'application.</li>
       <li><b>Ta photo de profil,</b> si tu en ajoutes une.</li>
       <li><b>Ton niveau et son évolution :</b> le niveau que tu déclares à l'inscription, puis les valeurs calculées par le moteur de classement à chaque match validé.</li>
       <li><b>Tes disponibilités</b> et tes clubs préférés, pour croiser les agendas des quatre joueurs avec les courts libres.</li>
       <li><b>Ton équipe, tes matchs et tes scores.</b></li>
       <li><b>Les messages</b> que tu écris dans le fil d'un match.</li>
       <li><b>Les avis</b> qui t'ont été adressés dans l'application.</li>
+      <li><b>Le jeton de notification de ton appareil,</b> si tu acceptes les notifications. Il désigne l'appareil et non toi, et ne sert qu'à t'alerter sur tes matchs.</li>
       <li><b>Le paiement de ton pass,</b> son montant, sa devise et la référence donnée par le prestataire de paiement.</li>
       <li><b>Des mesures d'usage internes,</b> pour savoir que le service fonctionne : une inscription, un score à saisir, un forfait appliqué, une négociation de créneau.</li>
     </ul>
     <h3>Ce que nous ne collectons pas</h3>
-    <p>MyPadelChamp ne collecte ni ta date de naissance, ni ta position, ni tes contacts, n'envoie aucune notification système et n'utilise aucun outil de mesure d'audience tiers. Aucune adresse IP n'est conservée dans notre base.</p>
+    <p>MyPadelChamp ne collecte ni ta position, ni tes contacts, et n'utilise aucun outil de mesure d'audience tiers : les mesures d'usage ci-dessus sont enregistrées dans notre propre base et ne partent chez personne. Aucune adresse IP n'est conservée dans notre base.</p>
   </section>
 
   <section class="carte">
@@ -92,15 +96,19 @@
           </tr>
           <tr>
             <th>Apple</th>
-            <td>Distribue l'application aux testeurs. Reçoit l'adresse email des personnes invitées à tester.</td>
+            <td>Distribue l'application aux testeurs, par TestFlight. Reçoit l'adresse email des personnes invitées à tester, et le jeton de notification des appareils iOS.</td>
           </tr>
           <tr>
             <th>Cloudflare, Inc.</th>
             <td>Héberge ce site. Ne reçoit aucune donnée de joueur, seulement les journaux d'accès aux pages.</td>
           </tr>
           <tr>
+            <th>Expo</th>
+            <td>Construit l'application et achemine les notifications, via son service de relais technique vers Apple et Google. Ne reçoit que le jeton de notification de ton appareil, sans donnée d'identification directe.</td>
+          </tr>
+          <tr>
             <th>Google</th>
-            <td>Héberge la messagerie du domaine, donc la boîte <a href="mailto:contact@mypadelchamp.com">contact@mypadelchamp.com</a>. Reçoit les courriels que tu nous adresses, y compris tes demandes sur tes données. Ne reçoit rien de ce que contient l'application.</td>
+            <td>Deux rôles distincts. Héberge la messagerie du domaine, donc la boîte <a href="mailto:contact@mypadelchamp.com">contact@mypadelchamp.com</a> : reçoit les courriels que tu nous adresses, y compris tes demandes sur tes données, mais rien de ce que contient l'application. Distribue aussi les notifications aux appareils Android : reçoit alors le jeton de notification, transmis par Expo.</td>
           </tr>
         </tbody>
       </table>
@@ -114,10 +122,11 @@
 
   <section class="carte">
     <h2>Les transferts hors de l'Union européenne</h2>
-    <p>Trois transferts ont lieu, et aucun autre.</p>
+    <p>Quatre transferts ont lieu, et aucun autre.</p>
     <ul>
       <li><b>Vers la Suisse,</b> pour l'hébergement de la base, couvert par la décision d'adéquation ci-dessus.</li>
       <li><b>Vers les États-Unis,</b> pour l'envoi de ton lien de connexion, par Plus Five Five, Inc., qui opère sous le nom Resend et adhère au cadre de protection des données entre l'Union européenne et les États-Unis.</li>
+      <li><b>Vers les États-Unis,</b> pour l'acheminement des notifications par Expo, qui ne reçoit que le jeton de notification de ton appareil. La base juridique exacte de ce transfert est en cours de vérification auprès d'Expo et sera publiée ici : nous préférons le dire plutôt que d'écrire une mention que nous n'avons pas vérifiée.</li>
       <li><b>Vers Google,</b> pour la messagerie du domaine. Il ne porte que sur les courriels que tu nous écris, jamais sur les données de ton compte, qui ne quittent pas la base hébergée à Zurich. La base juridique exacte de ce transfert est en cours de vérification auprès de Google et sera publiée ici : nous préférons le dire plutôt que d'écrire une mention que nous n'avons pas vérifiée.</li>
     </ul>
     <p>Pour l'hébergement de ce site par Cloudflare : comme Resend, Cloudflare, Inc. est certifiée sous le Data Privacy Framework UE-États-Unis (certification active, enregistrée sur <a href="https://www.dataprivacyframework.gov/participant/5666">dataprivacyframework.gov</a>).</p>
@@ -147,6 +156,17 @@
   <section class="carte">
     <h2>Ta photo de profil</h2>
     <p>Elle est servie par une adresse web publique, pour pouvoir s'afficher dans l'application. Cette adresse contient l'identifiant de ton compte, elle n'est donc pas devinable, mais elle n'est pas protégée par un mot de passe : quiconque la connaît peut voir la photo. Elle est supprimée avec ton compte.</p>
+  </section>
+
+  <section class="carte">
+    <h2>Sécurité</h2>
+    <ul>
+      <li><b>Pas de mot de passe.</b> La connexion se fait par lien à usage unique envoyé par courriel : il n'y a aucun mot de passe à voler ou à deviner.</li>
+      <li><b>Chiffrement en transit et au repos,</b> assuré par l'infrastructure de notre hébergeur.</li>
+      <li><b>Sauvegardes automatiques quotidiennes</b> de la base de données.</li>
+      <li><b>Accès d'administration limité</b> à un seul compte à ce jour, protégé par un second facteur d'authentification en plus du lien de connexion.</li>
+      <li>L'application comporte des écrans réservés à l'administration, accessibles uniquement aux comptes qui portent ce rôle en base.</li>
+    </ul>
   </section>
 
   <section class="carte">
