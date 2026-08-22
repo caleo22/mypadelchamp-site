@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Règlement sportif, MyPadelChamp</title>
+<meta name="description" content="Le règlement sportif des championnats MyPadelChamp : ligues, rencontres, scores, forfaits et classement.">
+<link rel="canonical" href="https://mypadelchamp.com/reglement-sportif">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="marque/blason.svg" type="image/svg+xml">
+<!--
+  Fait partie intégrante des Conditions générales (une fois publiées) : les chiffres ci-dessous
+  doivent rester identiques à ceux appliqués par le code, pas l'inverse.
+
+  Les délais de l'article 7.4 (report et forfait) viennent de
+  `supabase/functions/_shared/escalade.ts` : H+12 relance du capitaine, H+18 élargissement à
+  l'équipe, H+24 avertissement daté, H+36 ouverture d'un litige. Vérifié le 2026-08-22 contre
+  `cron-processor/index.ts:1100-1109` : à H+36 le match bascule au statut litige, arbitré par
+  MyPadelChamp, ce n'est PAS un forfait automatique. Ne pas réécrire cet article sans revérifier
+  le code, un règlement qui décrit mal ce qui se passe réellement est un règlement faux.
+
+  Reste hors de portée de cette page tant que non tranché ailleurs : rien, cette page ne dépend
+  ni de l'adresse du siège ni des mesures de sécurité, elle peut se publier indépendamment des
+  autres documents juridiques.
+-->
+</head>
+<body>
+
+<div class="page">
+
+  <div class="entete">
+    <img src="marque/blason.svg" alt="">
+    <a href="index.html">MyPadelChamp</a>
+  </div>
+
+  <h1>Règlement sportif</h1>
+  <p>Ce règlement dit comment se jouent les championnats MyPadelChamp : ligues, rencontres, scores, forfaits et classement. Il fait partie du contrat qui te lie à MyPadelChamp dès que tu t'inscris à un championnat.</p>
+
+  <section class="carte">
+    <h2>Le principe : une file d'attente, pas un calendrier fixe</h2>
+    <p>Il n'y a pas de date de rentrée nationale. Chaque ligue se constitue et se lance dès que son effectif est réuni, pour réunir des équipes de niveau comparable et des rencontres équilibrées.</p>
+    <p>Les championnats se jouent sur huit niveaux de ligue, de la Ligue 1 (le plus relevé) à la Ligue 8 (débutant). Un championnat dure trois mois à compter du lancement effectif de la ligue, au rythme indicatif d'une rencontre par semaine.</p>
+    <h3>Les trois catégories</h3>
+    <table class="mentions">
+      <tbody>
+        <tr><th>Open</th><td>Deux joueurs, sans condition de genre</td></tr>
+        <tr><th>Mixte strict</th><td>Un homme et une femme, composition vérifiée à l'inscription</td></tr>
+        <tr><th>Féminin</th><td>Deux femmes, réservé aux joueuses</td></tr>
+      </tbody>
+    </table>
+    <h3>Cumuler plusieurs championnats</h3>
+    <p>Un joueur peut être engagé dans deux championnats au maximum (Open et Mixte strict). Une joueuse peut l'être dans trois (Open, Mixte strict et Féminin). Chaque inscription forme une équipe distincte : deux joueurs peuvent donc s'inscrire ensemble dans plusieurs catégories sans se retrouver dans la même ligue.</p>
+  </section>
+
+  <section class="carte">
+    <h2>Constituer une équipe</h2>
+    <p>Une équipe compte deux titulaires et un remplaçant, désigné avant l'entrée en file d'attente et fixé pour tout le championnat. Le remplaçant doit avoir un compte MyPadelChamp actif, un niveau qui n'excède pas celui du plus faible des deux titulaires, et ne peut appartenir à aucune autre équipe du même championnat (il peut en revanche être titulaire ou remplaçant ailleurs).</p>
+    <p>Le niveau de l'équipe est la moyenne des niveaux de ses deux titulaires, arrondie au niveau supérieur : c'est lui qui fixe la ligue. L'équipe n'entre en file d'attente qu'une fois les deux Pass acquis.</p>
+  </section>
+
+  <section class="carte">
+    <h2>Lancer une ligue</h2>
+    <p>Une ligue réunit six équipes au minimum et douze au maximum.</p>
+    <table class="mentions">
+      <tbody>
+        <tr><th>6 à 8 équipes</th><td>Aller-retour, 10 à 14 rencontres environ, une par semaine</td></tr>
+        <tr><th>9 à 12 équipes</th><td>Aller simple, 8 à 11 rencontres environ, une par semaine</td></tr>
+      </tbody>
+    </table>
+    <p>Le lancement suit une jauge dégressive à partir de l'entrée de la première équipe en file d'attente : douze équipes réunies à tout moment déclenchent un lancement immédiat, dix au cinquième jour, six au dixième jour au plus tard. En dessous de six, aucun championnat ne se lance : l'équipe reste en file, informée de sa position, et si aucune ligue ne se forme avant l'expiration du Pass, il est remboursé intégralement. Tant que le lancement reste déclenché à la main par un administrateur, ces échéances sont des plafonds : la ligue peut partir avant, jamais après.</p>
+  </section>
+
+  <section class="carte">
+    <h2>Le déroulement d'une rencontre</h2>
+    <p>Chaque rencontre se joue en deux sets gagnants. À un set partout, le troisième set se joue en entier, avec un jeu décisif à sept points en cas d'égalité à six jeux partout : il n'y a jamais de super tie-break en dix points à la place du troisième set, pour que la rencontre se conclue sur le terrain. Les jeux du troisième set comptent au classement comme ceux des deux premiers.</p>
+    <p>MyPadelChamp met les équipes en relation et propose des créneaux communs, mais ne réserve aucun terrain : la réservation et son règlement auprès du club relèvent des joueurs, y compris en cas d'annulation ou de litige avec le club.</p>
+    <table class="mentions">
+      <tbody>
+        <tr><th>Victoire</th><td>3 points</td></tr>
+        <tr><th>Défaite</th><td>1 point</td></tr>
+        <tr><th>Forfait</th><td>0 point</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="carte">
+    <h2>Saisir et valider le score</h2>
+    <p>À l'issue de la rencontre, l'une des deux équipes saisit le score dans l'application. L'équipe adverse dispose de quarante-huit heures pour le valider ou le contester : passé ce délai sans réponse, le score saisi est réputé accepté et devient définitif. En cas de contestation, MyPadelChamp arbitre au vu des éléments transmis par les deux équipes ; sa décision est souveraine dans l'ordre sportif interne à l'application. Saisir volontairement un score erroné est un manquement grave.</p>
+  </section>
+
+  <section class="carte">
+    <h2>Le remplaçant</h2>
+    <p>Il peut jouer en cas d'indisponibilité d'un titulaire (blessure, absence ponctuelle), sans limite de principe : une équipe dont un titulaire est durablement blessé peut légitimement l'aligner sur toutes les rencontres restantes. Au-delà de quatre rencontres disputées par le remplaçant, l'équipe fait l'objet d'un signalement automatique, qui n'est pas une sanction mais une demande de justification. Une justification légitime clôt la vérification sans suite ; à défaut, ou en cas de recours qui contourne manifestement les règles de niveau, l'équipe s'expose aux sanctions de l'article suivant.</p>
+  </section>
+
+  <section class="carte">
+    <h2>Report et forfait</h2>
+    <p>Une demande de report faite au moins vingt-quatre heures avant l'horaire convenu est de droit, l'équipe adverse ne peut pas la refuser : les deux équipes conviennent alors d'un nouveau créneau parmi ceux qui restent disponibles avant le terme du championnat. Si aucun créneau commun n'est trouvé, la rencontre est annulée sans point pour aucune des deux équipes.</p>
+    <p>Toute annulation à moins de vingt-quatre heures de l'horaire convenu, comme toute absence non annoncée, vaut forfait automatique de l'équipe défaillante : elle ne marque aucun point, l'équipe adverse reçoit les points de la victoire, et aucune rencontre ne peut se solder par un double forfait.</p>
+    <h3>Silence de l'équipe : quatre paliers</h3>
+    <p>Quand une rencontre ne se planifie pas faute de réponse, l'escalade suit quatre paliers automatiques, chacun laissant une trace consultable dans le fil du match :</p>
+    <table class="mentions">
+      <tbody>
+        <tr><th>H+12</th><td>Relance du capitaine silencieux</td></tr>
+        <tr><th>H+18</th><td>Élargissement à toute l'équipe (capitaine adjoint, partenaires, remplaçant)</td></tr>
+        <tr><th>H+24</th><td>Avertissement formel daté, visible des deux équipes</td></tr>
+        <tr><th>H+36</th><td>Ouverture d'un litige, arbitré par MyPadelChamp comme à l'article précédent : ce n'est pas un forfait automatique, c'est le silence total qui devient un litige à trancher</td></tr>
+      </tbody>
+    </table>
+    <p>Les forfaits répétés faussent le championnat pour tous les participants : un avertissement est notifié dès le deuxième forfait constaté, et le troisième entraîne l'exclusion de plein droit. L'équipe dispose de huit jours à compter de la notification pour la contester par écrit à <a href="mailto:contact@mypadelchamp.com">contact@mypadelchamp.com</a> ; la décision finale de MyPadelChamp en garde la trace. Les résultats déjà acquis restent, les rencontres qui lui restaient à jouer sont attribuées en forfait gagnant à ses adversaires pour préserver le classement des autres équipes, et l'exclusion emporte la perte du Pass sans remboursement, sans empêcher une inscription ultérieure moyennant un nouveau Pass.</p>
+  </section>
+
+  <section class="carte">
+    <h2>Manquements et sanctions sportives</h2>
+    <p>Un niveau volontairement inexact, un score volontairement faussé, un remplaçant aligné hors des conditions ci-dessus, un joueur non déclaré qui participe, ou tout comportement contraire à l'esprit sportif : selon la gravité, MyPadelChamp peut prononcer un avertissement, annuler un résultat, retirer des points, exclure du championnat en cours ou suspendre le compte. L'équipe est informée du manquement reproché et peut présenter ses observations avant toute mesure, sauf urgence ou manquement particulièrement grave.</p>
+    <p>Trois manquements, et seulement ceux-là, entraînent l'exclusion sans remboursement : les forfaits répétés au-delà du seuil ci-dessus, la falsification d'un score constatée après contestation, et l'usurpation d'identité ou la participation d'un joueur non déclaré. Tout autre manquement se sanctionne sans emporter automatiquement la perte du Pass.</p>
+  </section>
+
+  <section class="carte">
+    <h2>Classement, montées et descentes</h2>
+    <p>Le classement se fait au total de points. À égalité, le départage regarde d'abord la confrontation directe entre les deux équipes concernées, puis la différence de jeux du segment, puis la différence de sets ; si trois équipes ou plus restent liées par des résultats circulaires, un classement réduit se fait entre elles seules sur leurs rencontres mutuelles.</p>
+    <table class="mentions">
+      <tbody>
+        <tr><th>6 équipes</th><td>La 1re monte, la dernière descend</td></tr>
+        <tr><th>7 à 12 équipes</th><td>Les deux premières montent, les deux dernières descendent</td></tr>
+      </tbody>
+    </table>
+    <p>L'équipe qui termine première d'une Ligue 1 y reste et reçoit le titre de Champion de Ligue, avec un trophée débloquable. Le championnat se termine à l'issue de la dernière rencontre programmée, et le classement devient alors définitif.</p>
+  </section>
+
+  <section class="carte">
+    <h2>L'évaluation après la rencontre</h2>
+    <p>Après chaque rencontre, les joueurs peuvent évaluer l'équilibre du match et le niveau de leurs adversaires, avec un commentaire facultatif. Ces évaluations sont strictement confidentielles, jamais communiquées aux joueurs évalués ni rendues publiques : elles servent uniquement à MyPadelChamp pour ajuster les niveaux et la qualité des appariements. L'évaluation elle-même reste facultative.</p>
+  </section>
+
+  <section class="carte">
+    <h2>Le Mode Loisir</h2>
+    <p>Le Mode Loisir organise des rencontres amicales, hors championnat, de deux façons : le match libre, où ton équipe se positionne sur un créneau et l'application lui trouve une équipe adverse de niveau comparable, et le mode défi, où ton équipe désigne l'adversaire ou demande à l'application de lui en désigner un, l'équipe sollicitée devant accepter explicitement.</p>
+    <p>Championnat, match libre et mode défi ne se distinguent pas par leurs effets : c'est l'écart de niveau entre les deux équipes qui détermine ce qui compte au classement de progression, à condition que les deux équipes soient inscrites en Mode Loisir. Une équipe de championnat qui joue un match amical en dehors de sa journée officielle ne voit donc pas cette rencontre affecter son classement de championnat. Les badges de style s'acquièrent dans les mêmes conditions, en match libre comme en mode défi. Les fanions, récompense collective de l'équipe, ne se gagnent qu'en championnat.</p>
+  </section>
+
+  <section class="carte">
+    <h2>Modifier ce règlement</h2>
+    <p>MyPadelChamp peut faire évoluer ce règlement. Toute modification substantielle t'est signalée dans l'application ou par courriel, dans les mêmes conditions que les conditions générales. Aucune modification ne s'applique à un championnat déjà engagé, sauf accord unanime des équipes concernées ou nécessité impérieuse.</p>
+  </section>
+
+  <footer class="pied">
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+      <a href="suppression-de-compte.html">Supprimer mon compte</a>
+    </nav>
+    <p>Dernière mise à jour : <span class="jeton">{{DATE_PUBLICATION}}</span>.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
