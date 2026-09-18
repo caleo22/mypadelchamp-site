@@ -417,3 +417,236 @@ li { margin-top: 6px; }
   /* Une adresse email ou une URL ne doit pas pousser la carte hors de l'écran. */
   a { overflow-wrap: anywhere; }
 }
+
+/* ===== Page /app : un terrain par information =====
+   Page d'arrivée du QR des affiches de club. Chaque information est portée par un court vu du
+   ciel au tracé réglementaire, dans une surface de l'app prélevée sur photo (Terrains et
+   SURFACES de l'app) : bleu sablé pour l'App Store, synthétique vert pour Android, terre battue
+   pour Instagram. L'élément central est posé sur le filet, comme le VS de l'affiche de match,
+   et les lignes s'interrompent autour de lui : Apple demande autour du badge une marge libre
+   d'un quart de sa hauteur. */
+
+:root {
+  --sable-haut: #1e63c4;
+  --sable-bas: #0f4ba6;
+  --gazon-haut: #6e8f57;
+  --gazon-bas: #4c6345;
+  --terre-haut: #cc774c;
+  --terre-bas: #96532f;
+  /* Couleur du VS de chaque terrain (Terrains.*.vs) */
+  --gazon-vs: #eef4dd;
+  /* Lignes de court : COURT_LINE de l'affiche de l'app */
+  --ligne-court: rgba(255, 255, 255, 0.22);
+  /* La plaque du site (offre.tsx:276), navy à 62 % */
+  --plaque: rgba(18, 32, 54, 0.62);
+}
+
+/* Le bandeau reprend la photo de l'image de présentation Play. Pas de second voile sur une
+   photo déjà bichromée : un dégradé local sous le texte seulement, dimensionné au pire pixel
+   de la zone de texte (6,4:1 mesuré le 18/09). */
+.bandeau-app {
+  position: relative;
+  z-index: 2;
+  height: 240px;
+  overflow: hidden;
+  background: var(--champ-bas);
+}
+.bandeau-app .bandeau-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 40% 20%;
+}
+.bandeau-app::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 62%;
+  background: linear-gradient(180deg, rgba(3, 48, 216, 0), rgba(3, 48, 216, 0.82) 70%);
+}
+.bandeau-texte {
+  position: absolute;
+  z-index: 1;
+  left: 20px;
+  bottom: 20px;
+}
+.bandeau-texte h1 { margin: 0; line-height: 0; }
+.bandeau-texte h1 img {
+  width: 220px;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+.bandeau-texte p {
+  margin: 10px 0 0;
+  font-size: var(--t-base);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--surface);
+}
+
+.page-app { max-width: 560px; padding-top: 20px; }
+.app-colonne { max-width: 720px; margin-top: 18px; }
+.app-colonne .pied { margin-top: 28px; }
+
+.terrains {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* La carte : le court inscrit à 12 px (les vitres), qui garde sa proportion 2:1 à toute
+   largeur ; la carte en tire sa hauteur. */
+.terrain {
+  position: relative;
+  display: block;
+  /* En bas, la zone technique hors des vitres, comme sur l'affiche de l'app */
+  padding: 12px 12px 44px;
+  border-radius: var(--rayon-carte);
+  overflow: hidden;
+  box-shadow: var(--ombre-affiche);
+  color: var(--surface);
+  text-decoration: none;
+}
+a.terrain:focus-visible { outline: 3px solid var(--texte); outline-offset: 3px; }
+.terrain-sable { background: linear-gradient(160deg, var(--sable-haut), var(--sable-bas)); }
+.terrain-gazon { background: linear-gradient(160deg, var(--gazon-haut), var(--gazon-bas)); }
+.terrain-terre { background: linear-gradient(160deg, var(--terre-haut), var(--terre-bas)); }
+/* Les nappes de sable du bleu sablé, extraites de la photo de référence de l'app. */
+.terrain-sable::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  mix-blend-mode: screen;
+  background: url('images/sable.png') center / cover;
+  pointer-events: none;
+}
+
+.court {
+  --gw: 0px;  /* largeur libre autour de l'élément central */
+  --gh: 0px;  /* hauteur libre autour de l'élément central */
+  position: relative;
+  display: block;
+  aspect-ratio: 2 / 1;
+}
+.court > span { position: absolute; }
+.l-cadre { inset: 0; border: 1.5px solid var(--ligne-court); }
+/* Lignes de service à 3,05 m du fond, soit 15,25 % des 20 m */
+.l-service-g, .l-service-d { top: 0; bottom: 0; width: 1.5px; background: var(--ligne-court); }
+.l-service-g { left: 15.25%; }
+.l-service-d { right: 15.25%; }
+/* Ligne centrale, entre les deux lignes de service, coupée autour de l'élément */
+.l-centre-g, .l-centre-d { top: calc(50% - 0.75px); height: 1.5px; background: var(--ligne-court); }
+.l-centre-g { left: 15.25%; right: calc(50% + var(--gw) / 2); }
+.l-centre-d { left: calc(50% + var(--gw) / 2); right: 15.25%; }
+/* Le filet, en pointillé, coupé de même */
+.l-filet-h, .l-filet-b { left: calc(50% - 1px); width: 0; border-left: 2px dotted rgba(255, 255, 255, 0.7); }
+.l-filet-h { top: 0; bottom: calc(50% + var(--gh) / 2); }
+.l-filet-b { top: calc(50% + var(--gh) / 2); bottom: 0; }
+.poteau { left: calc(50% - 3px); width: 6px; height: 6px; border-radius: 3px; background: var(--surface); }
+.poteau-h { top: -3px; }
+.poteau-b { bottom: -3px; }
+
+.centre {
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.badge-app-store { display: block; height: 56px; width: auto; }
+.plaque-filet {
+  display: block;
+  padding: 8px 16px;
+  background: var(--plaque);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 9px;
+  font-family: 'Barlow Condensed', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.1;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--gazon-vs);
+}
+.qr {
+  display: block;
+  background: var(--surface);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.qr img { display: block; width: 100%; height: 100%; }
+/* Le QR généré n'a qu'un module de marge : la norme en demande quatre. */
+.qr-marge { padding: 8px; }
+.qr-marge img { image-rendering: pixelated; }
+.terrain-instagram .qr { width: 120px; height: 120px; }
+
+.terrain-apple .court { --gw: 205px; --gh: 84px; }
+.terrain-gazon .court { --gw: 200px; --gh: 84px; }
+.terrain-instagram .court { --gw: 144px; --gh: 128px; }
+
+/* Les deux camps ne servent que sur ordinateur, où l'on doit faire passer l'app sur le
+   téléphone : le badge dans un camp, le QR de la fiche dans l'autre. */
+.camps { display: none; }
+
+/* La zone technique : une information que le centre ne porte pas, hors des vitres (charte
+   §2.1), sur une plaque locale ; le blanc seul échouait au contraste sur les trois terrains
+   (1,6 à 3,6:1 au pire pixel). */
+.zone-technique {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  padding: 3px 8px;
+  background: var(--plaque);
+  border-radius: 6px;
+  font-family: 'Barlow Condensed', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: var(--t-base);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--surface);
+}
+
+@media (min-width: 600px) {
+  .bandeau-app { height: 360px; }
+  .bandeau-app .bandeau-photo { object-position: 40% 0%; }
+  .bandeau-texte { left: 48px; bottom: 48px; }
+  .bandeau-texte h1 img { width: 368px; }
+  .bandeau-texte p { font-size: 24px; }
+  .page-app { padding-top: 32px; }
+}
+
+/* À partir de 900 px on est sur ordinateur : il faut faire passer l'app sur le téléphone, donc
+   la carte App Store montre aussi le QR de la fiche. En dessous de 1180 px, les terrains restent
+   empilés (560 px de large, le court a toute la place). */
+@media (min-width: 900px) {
+  .terrain-apple .centre-seul { display: none; }
+  .terrain-apple .camps { display: flex; inset: 0; }
+  .terrain-apple .court { --gw: 9999px; --gh: 152px; }
+  .terrain-apple .l-filet-h, .terrain-apple .l-filet-b { top: 0; bottom: 0; }
+  /* Les lignes de service s'interrompent sur la hauteur du badge et du QR. */
+  .terrain-apple .l-service-g, .terrain-apple .l-service-d {
+    background: linear-gradient(180deg,
+      var(--ligne-court) calc(50% - var(--gh) / 2), transparent 0,
+      transparent calc(50% + var(--gh) / 2), var(--ligne-court) 0);
+  }
+  .camp { flex: 1 1 0; display: flex; align-items: center; justify-content: center; }
+  .camps .badge-app-store { height: 48px; }
+  .camps .qr { width: 140px; height: 140px; }
+
+  .terrain-instagram .qr { width: 160px; height: 160px; }
+  .terrain-instagram .court { --gw: 184px; --gh: 168px; }
+}
+
+/* Trois terrains de front à partir de 1180 px : en dessous, un QR de 160 px ne tient plus
+   dans la hauteur d'un court de trois colonnes. */
+@media (min-width: 1180px) {
+  .page-app { max-width: 1256px; }
+  .terrains { flex-direction: row; gap: 17px; }
+  .terrain { flex: 1 1 0; min-width: 0; }
+  .app-colonne { margin-top: 24px; }
+}
