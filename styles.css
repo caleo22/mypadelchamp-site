@@ -8,6 +8,12 @@
  * commentaire et crierait à chaque passage. Toute taille vient de l'échelle Type du même
  * fichier, plancher 12 px.
  *
+ * CACHE : le domaine garde cette feuille 4 heures chez le visiteur (max-age=14400, mesuré le
+ * 2026-09-18), alors que les pages HTML sont revérifiées à chaque visite. Une page qui dépend
+ * d'une règle neuve l'appelle donc par une adresse versionnée (styles.css?v=AAAAMMJJ), à changer
+ * à chaque modification qui la concerne. Sans cela, un visiteur récent voit la page sans ses
+ * styles : c'est arrivé à la page /app le jour de sa sortie.
+ *
  * Aucune ressource externe : les polices sont servies depuis polices/, le grain est un SVG
  * inline en data URI. C'est ce qui rend vraie la phrase « aucun cookie ni traceur » de la
  * politique de confidentialité.
@@ -468,11 +474,16 @@ li { margin-top: 6px; }
   height: 62%;
   background: linear-gradient(180deg, rgba(3, 48, 216, 0), rgba(3, 48, 216, 0.82) 70%);
 }
+/* Le texte du bandeau suit la colonne des terrains : même largeur maximale, même marge. */
 .bandeau-texte {
   position: absolute;
   z-index: 1;
-  left: 20px;
+  left: 0;
+  right: 0;
   bottom: 20px;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 .bandeau-texte h1 { margin: 0; line-height: 0; }
 .bandeau-texte h1 img {
@@ -614,7 +625,7 @@ a.terrain:focus-visible { outline: 3px solid var(--texte); outline-offset: 3px; 
 @media (min-width: 600px) {
   .bandeau-app { height: 360px; }
   .bandeau-app .bandeau-photo { object-position: 40% 0%; }
-  .bandeau-texte { left: 48px; bottom: 48px; }
+  .bandeau-texte { bottom: 48px; }
   .bandeau-texte h1 img { width: 368px; }
   .bandeau-texte p { font-size: 24px; }
   .page-app { padding-top: 32px; }
@@ -638,15 +649,20 @@ a.terrain:focus-visible { outline: 3px solid var(--texte); outline-offset: 3px; 
   .camps .badge-app-store { height: 48px; }
   .camps .qr { width: 140px; height: 140px; }
 
-  .terrain-instagram .qr { width: 160px; height: 160px; }
-  .terrain-instagram .court { --gw: 184px; --gh: 168px; }
+  /* Même taille que le QR de l'App Store : les deux hauts s'alignent d'une carte à l'autre. */
+  .terrain-instagram .qr { width: 140px; height: 140px; }
+  .terrain-instagram .court { --gw: 164px; --gh: 148px; }
 }
 
 /* Trois terrains de front à partir de 1180 px : en dessous, un QR de 160 px ne tient plus
    dans la hauteur d'un court de trois colonnes. */
 @media (min-width: 1180px) {
   .page-app { max-width: 1256px; }
+  .bandeau-texte { max-width: 1256px; }
   .terrains { flex-direction: row; gap: 17px; }
+  /* Deux colonnes exactes de la grille des terrains : le bord droit tombe sur celui du
+     deuxième terrain. */
+  .app-colonne { max-width: calc((100% - 34px) / 3 * 2 + 17px); }
   .terrain { flex: 1 1 0; min-width: 0; }
   .app-colonne { margin-top: 24px; }
 }
