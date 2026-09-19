@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paiement reçu, MyPadelChamp</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="styles.css?v=20260919">
+<link rel="icon" href="marque/blason.svg" type="image/svg+xml">
+<!--
+  Page d'arrivée de la fonction `paiement` (correctif B du
+  2026-09-19). Elle ne sert que par redirection, jamais par un lien du site. Aucun script :
+  le retour dans l'app est un lien `mypadelchamp:///` que le joueur touche, la politique de
+  confidentialité affirmant que le site n'exécute rien. Gabarit : celui de 404.html.
+-->
+</head>
+<body>
+
+<div class="page">
+
+  <div class="entete">
+    <img src="marque/blason.svg" alt="">
+    <a href="index.html">MyPadelChamp</a>
+  </div>
+
+  <h1>Ton pass est pris</h1>
+  <p>Ton paiement est enregistré. Ton équipe entre en championnat quand vos deux pass sont pris : tout se suit dans l'application.</p>
+
+  <a class="carte carte-lien" href="mypadelchamp:///">
+    <h2>Revenir dans l'application</h2>
+    <p class="note">Si l'application ne s'ouvre pas, ouvre-la depuis ton écran d'accueil : ton pass y est déjà.</p>
+  </a>
+
+</div>
+
+</body>
+</html>

@@ -331,6 +331,15 @@ a { color: var(--primaire); text-decoration: underline; text-underline-offset: 2
   color: rgba(18, 32, 54, 0.66);
 }
 
+/* Une carte entière qui est un lien : le geste unique des pages de retour du paiement
+   (paiement-recu, paiement-en-cours, paiement-impossible). Arbitré par Derek le 2026-09-19 :
+   le lien seul faisait 18 px de haut, la carte en fait 114. Précédent : les terrains de /app,
+   liens de toute leur surface (`a.terrain`). */
+a.carte-lien { display: block; color: var(--texte); text-decoration: none; }
+a.carte-lien h2 { margin: 0; color: var(--primaire); }
+a.carte-lien .note { margin-top: 8px; }
+a.carte-lien:focus-visible { outline: 3px solid var(--texte); outline-offset: 3px; }
+
 /* ===== Logos des cartes ===== */
 
 .logos-cartes {
