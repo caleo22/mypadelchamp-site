@@ -6,7 +6,7 @@
 <title>Télécharger MyPadelChamp</title>
 <meta name="description" content="MyPadelChamp met en relation les joueurs de padel près de chez toi. L'application sur iPhone, bientôt sur Android, et le compte Instagram.">
 <link rel="canonical" href="https://mypadelchamp.com/app">
-<link rel="stylesheet" href="styles.css?v=20260918">
+<link rel="stylesheet" href="styles.css?v=20260923">
 <link rel="icon" href="marque/blason.svg" type="image/svg+xml">
 <!--
   Page d'arrivée du QR code des affiches posées dans les clubs. Page vitrine, sans redirection :
@@ -16,8 +16,9 @@
   Un terrain par information, vu du ciel au tracé réglementaire (10 x 20 m, lignes de service à
   6,95 m du filet). Les trois surfaces sont celles de l'app, prélevées sur des photos de terrains.
 
-  LE JOUR DE LA SORTIE ANDROID : la carte verte devient un lien vers la fiche Google Play et
-  reçoit le badge officiel, qui ne peut pas s'afficher avant (règles de marque de Google).
+  La carte verte suit la carte App Store depuis la sortie Android du 22/09 : badge officiel de
+  Google, rogné de sa marge transparente mais jamais redessiné (règles de marque de Google), et
+  QR de la fiche sur ordinateur.
 -->
 </head>
 <body>
@@ -50,17 +51,21 @@
       <span class="zone-technique">iPhone</span>
     </a>
 
-    <div class="terrain terrain-gazon">
+    <a class="terrain terrain-gazon terrain-google" href="https://play.google.com/store/apps/details?id=com.mypadelchamp.app">
       <span class="court">
         <span class="l-cadre"></span>
         <span class="l-service-g"></span><span class="l-service-d"></span>
         <span class="l-centre-g"></span><span class="l-centre-d"></span>
         <span class="l-filet-h"></span><span class="l-filet-b"></span>
         <span class="poteau poteau-h"></span><span class="poteau poteau-b"></span>
-        <span class="centre"><span class="plaque-filet">Bientôt sur<br>Google Play</span></span>
+        <span class="centre centre-seul"><img class="badge-google-play" src="marque/google-play-fr.png" alt="Disponible sur Google Play"></span>
+        <span class="camps">
+          <span class="camp"><img class="badge-google-play" src="marque/google-play-fr.png" alt="Disponible sur Google Play"></span>
+          <span class="camp"><span class="qr qr-marge"><img src="images/qr-google-play.png" alt="QR code de la fiche Google Play de MyPadelChamp"></span></span>
+        </span>
       </span>
       <span class="zone-technique">Android</span>
-    </div>
+    </a>
 
     <a class="terrain terrain-terre terrain-instagram" href="https://www.instagram.com/mypadelchamp">
       <span class="court">
