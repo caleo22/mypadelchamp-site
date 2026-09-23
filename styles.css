@@ -615,6 +615,10 @@ a.terrain:focus-visible { outline: 3px solid var(--texte); outline-offset: 3px; 
   color: var(--surface);
 }
 
+/* La consigne dit le geste, pas « télécharger », que le badge dit déjà (charte §4) : on touche
+   sur téléphone, on scanne le QR sur ordinateur. */
+.geste-ordi { display: none; }
+
 @media (min-width: 600px) {
   .bandeau-app { height: 360px; }
   .bandeau-app .bandeau-photo { object-position: 40% 0%; }
@@ -628,6 +632,8 @@ a.terrain:focus-visible { outline: 3px solid var(--texte); outline-offset: 3px; 
    les cartes App Store et Google Play montrent aussi le QR de leur fiche. En dessous de 1180 px, les terrains restent
    empilés (560 px de large, le court a toute la place). */
 @media (min-width: 900px) {
+  .geste-tel { display: none; }
+  .geste-ordi { display: inline; }
   :is(.terrain-apple, .terrain-google) .centre-seul { display: none; }
   :is(.terrain-apple, .terrain-google) .camps { display: flex; inset: 0; }
   :is(.terrain-apple, .terrain-google) .court { --gw: 9999px; --gh: 152px; }
