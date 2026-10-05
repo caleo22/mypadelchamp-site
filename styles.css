@@ -665,3 +665,5 @@ a.terrain:focus-visible { outline: 3px solid var(--texte); outline-offset: 3px; 
   .terrain { flex: 1 1 0; min-width: 0; }
   .app-colonne { margin-top: 24px; }
 }
+
+.invitation { margin-bottom: 16px; }

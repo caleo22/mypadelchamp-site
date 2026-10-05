@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.mypadelchamp.app",
+      "sha256_cert_fingerprints": ["65:AC:F5:32:C6:58:99:48:9D:C3:09:92:65:23:3B:0D:43:20:11:FE:28:6C:93:BB:35:42:91:88:41:1A:A2:70"]
+    }
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["8YB96B929R.com.mypadelchamp.ios"],
+        "components": [
+          { "/": "/app", "?": { "n": "????" }, "comment": "Lien d'invitation : mypadelchamp.com/app?n=CWMQ (S14)" }
+        ]
+      }
+    ]
+  }
+}

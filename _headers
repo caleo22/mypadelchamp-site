@@ -17,3 +17,7 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
+
+# Le lien universel de l'invitation (S14) : iOS lit ce fichier sans extension et exige du JSON.
+/.well-known/apple-app-site-association
+  Content-Type: application/json
