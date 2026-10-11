@@ -58,6 +58,7 @@
       <li><b>Tes disponibilités</b> et tes clubs préférés, pour croiser les agendas des quatre joueurs avec les courts libres.</li>
       <li><b>Ton équipe, tes matchs et tes scores.</b></li>
       <li><b>Les messages</b> que tu écris dans le fil d'un match, d'un cours ou d'un groupe, et <b>les messages privés</b> que tu échanges avec un autre joueur.</li>
+      <li><b>Les messages que tu nous adresses</b> dans ta conversation avec MyPadelChamp, et le statut et le sujet que nous lui donnons pour suivre ta demande (voir <a href="#nous-ecrire">plus bas</a>).</li>
       <li><b>Tes groupes :</b> ceux que tu crées ou rejoins, qui t'y a invité, et la date de ton entrée.</li>
       <li><b>Tes liens avec les autres joueurs</b> : tes demandes et tes liens d'amitié, tes demandes de message envoyées et reçues et la réponse qui leur est faite, les joueurs que tu as bloqués, et les messages que tu as signalés à la modération. Un blocage n'est visible que de toi. Un signalement est lu par l'administrateur, qui peut te répondre à l'adresse de ton compte.</li>
       <li><b>Les avis</b> qui t'ont été adressés dans l'application.</li>
@@ -76,7 +77,7 @@
     <h2>Pourquoi, et sur quelle base</h2>
     <p>Tout ce qui précède sert à te faire jouer un championnat : former ton équipe, t'apparier à un adversaire de force voisine, fixer un créneau, tenir le fil du match et valider les scores. La base juridique est l'<b>exécution du contrat</b> qui nous lie quand tu ouvres un compte et que tu engages ton équipe (article 6.1.b du RGPD). Il en va de même des groupes, des messages, de la recherche d'un partenaire et de la réservation d'un cours : ce sont des fonctions du service, que tu utilises si tu le décides.</p>
     <p>Si tu demandes à figurer parmi les coachs, ton dossier sert à cela et à rien d'autre : vérifier ton diplôme, puis publier ta fiche. La base juridique est la même, l'<b>exécution du contrat</b> que tu formes en déposant ta demande (article 6.1.b).</p>
-    <p>Trois exceptions : les <b>mesures d'usage internes</b> reposent sur notre intérêt légitime à vérifier que le service fonctionne (article 6.1.f) ; <b>le classement FFT</b>, et le calcul de ton niveau de départ à partir de lui, sur notre intérêt légitime et celui de nos membres (article 6.1.f, détail <a href="#classement-fft">plus bas</a>) ; les <b>pièces liées au paiement</b>, sur une obligation légale de conservation comptable (article 6.1.c).</p>
+    <p>Quatre exceptions : les <b>mesures d'usage internes</b> reposent sur notre intérêt légitime à vérifier que le service fonctionne (article 6.1.f) ; <b>le classement FFT</b>, et le calcul de ton niveau de départ à partir de lui, sur notre intérêt légitime et celui de nos membres (article 6.1.f, détail <a href="#classement-fft">plus bas</a>) ; <b>l'analyse des messages que tu nous adresses</b>, sur notre intérêt légitime à améliorer le service (article 6.1.f, détail <a href="#nous-ecrire">plus bas</a>) ; les <b>pièces liées au paiement</b>, sur une obligation légale de conservation comptable (article 6.1.c).</p>
   </section>
 
   <section class="carte">
@@ -103,7 +104,7 @@
           </tr>
           <tr>
             <th>Apple</th>
-            <td>Distribue l'application sur l'App Store. Distribue aussi, par TestFlight, les versions que nous faisons essayer avant publication : reçoit alors l'adresse email des personnes invitées. Reçoit le jeton de notification des appareils iOS.</td>
+            <td>Distribue l'application sur l'App Store. Distribue aussi, par TestFlight, les versions que nous faisons essayer avant publication : reçoit alors l'adresse email des personnes invitées. Reçoit le jeton de notification des appareils iOS et le texte des notifications qui leur sont adressées.</td>
           </tr>
           <tr>
             <th>Cloudflare, Inc.</th>
@@ -111,7 +112,7 @@
           </tr>
           <tr>
             <th>Expo</th>
-            <td>Construit l'application et achemine les notifications, via son service de relais technique vers Apple et Google. Ne reçoit que le jeton de notification de ton appareil, sans donnée d'identification directe.</td>
+            <td>Construit l'application et achemine les notifications, via son service de relais technique vers Apple et Google. Reçoit le jeton de notification de ton appareil et le texte de chaque notification, qui peut porter le nom d'un joueur et le début d'un message.</td>
           </tr>
           <tr>
             <th>GitHub, Inc.</th>
@@ -119,7 +120,11 @@
           </tr>
           <tr>
             <th>Google</th>
-            <td>Deux rôles distincts. Héberge la messagerie du domaine, donc la boîte <a href="mailto:contact@mypadelchamp.com">contact@mypadelchamp.com</a> : reçoit les courriels que tu nous adresses, y compris tes demandes sur tes données, mais rien de ce que contient l'application. Distribue aussi les notifications aux appareils Android : reçoit alors le jeton de notification, transmis par Expo.</td>
+            <td>Deux rôles distincts. Héberge la messagerie du domaine, donc la boîte <a href="mailto:contact@mypadelchamp.com">contact@mypadelchamp.com</a> : reçoit les courriels que tu nous adresses, y compris tes demandes sur tes données, mais rien de ce que contient l'application. Distribue aussi les notifications aux appareils Android : reçoit alors le jeton et le texte de la notification, transmis par Expo.</td>
+          </tr>
+          <tr>
+            <th>Anthropic</th>
+            <td>Fournit Claude, l'assistant avec lequel nous analysons les messages que les joueurs nous adressent dans l'application. Ne reçoit que l'export décrit <a href="#nous-ecrire">plus bas</a>, sans nom ni identifiant de compte. Notre contrat est conclu avec Anthropic Ireland, Limited ; les données sont stockées aux États-Unis.</td>
           </tr>
         </tbody>
       </table>
@@ -133,13 +138,14 @@
 
   <section class="carte">
     <h2>Les transferts hors de l'Union européenne</h2>
-    <p>Cinq transferts ont lieu, et aucun autre.</p>
+    <p>Six transferts ont lieu, et aucun autre.</p>
     <ul>
       <li><b>Vers la Suisse,</b> pour l'hébergement de la base, couvert par la décision d'adéquation ci-dessus.</li>
       <li><b>Vers les États-Unis,</b> pour l'envoi de ton lien de connexion, par Plus Five Five, Inc., qui opère sous le nom Resend et adhère au cadre de protection des données entre l'Union européenne et les États-Unis.</li>
-      <li><b>Vers les États-Unis,</b> pour l'acheminement des notifications par Expo, qui ne reçoit que le jeton de notification de ton appareil. La base juridique exacte de ce transfert est en cours de vérification auprès d'Expo et sera publiée ici : nous préférons le dire plutôt que d'écrire une mention que nous n'avons pas vérifiée.</li>
+      <li><b>Vers les États-Unis,</b> pour l'acheminement des notifications par Expo, qui reçoit le jeton de notification de ton appareil et le texte de chaque notification. La base juridique exacte de ce transfert est en cours de vérification auprès d'Expo et sera publiée ici : nous préférons le dire plutôt que d'écrire une mention que nous n'avons pas vérifiée.</li>
       <li><b>Vers les États-Unis,</b> pour la lecture mensuelle du classement FFT par GitHub, Inc., qui ne porte que sur le document public du classement. GitHub, Inc. déclare dans sa politique de confidentialité adhérer au cadre de protection des données entre l'Union européenne et les États-Unis.</li>
       <li><b>Vers Google,</b> pour la messagerie du domaine. Il ne porte que sur les courriels que tu nous écris, jamais sur les données de ton compte, qui ne quittent pas la base hébergée à Zurich. La base juridique exacte de ce transfert est en cours de vérification auprès de Google et sera publiée ici : nous préférons le dire plutôt que d'écrire une mention que nous n'avons pas vérifiée.</li>
+      <li><b>Vers les États-Unis,</b> où Anthropic stocke les données, pour l'analyse des messages que tu nous adresses dans l'application ; Anthropic peut aussi faire traiter une demande dans d'autres pays où elle dispose de serveurs, en Europe, en Asie ou en Australie. Ce transfert ne porte que sur l'export sans nom décrit plus haut. Anthropic n'adhère pas au cadre de protection des données entre l'Union européenne et les États-Unis. Le transfert est encadré par les clauses contractuelles types adoptées par la Commission européenne, que son contrat de sous-traitant intègre.</li>
     </ul>
     <p>Pour l'hébergement de ce site par Cloudflare : comme Resend, Cloudflare, Inc. est certifiée sous le Data Privacy Framework UE-États-Unis (certification active, enregistrée sur <a href="https://www.dataprivacyframework.gov/participant/5666">dataprivacyframework.gov</a>).</p>
   </section>
@@ -155,8 +161,8 @@
   </section>
 
   <section class="carte">
-    <h2>Ce qui reste après une suppression de compte</h2>
-    <p>La suppression efface ton compte, ton profil, ta photo, tes disponibilités, tes clubs préférés, ton historique de niveau, ta participation aux matchs, les avis qui t'étaient adressés, tes propositions de créneau et d'équipe, ta place dans tes groupes, tes demandes de message, ta recherche d'un partenaire, tes réservations de cours, le lien vers ton classement FFT, et les mesures d'usage te concernant.</p>
+    <h2 id="apres-suppression">Ce qui reste après une suppression de compte</h2>
+    <p>La suppression efface ton compte, ton profil, ta photo, tes disponibilités, tes clubs préférés, ton historique de niveau, ta participation aux matchs, les avis qui t'étaient adressés, tes propositions de créneau et d'équipe, ta place dans tes groupes, le statut et le sujet de ta conversation avec MyPadelChamp, tes demandes de message, ta recherche d'un partenaire, tes réservations de cours, le lien vers ton classement FFT, et les mesures d'usage te concernant.</p>
     <p>Trois choses subsistent, sans plus être rattachées à ton nom :</p>
     <ul>
       <li><b>Le corps des messages</b> que tu as écrits dans un fil de match, de cours ou de groupe reste lisible par les autres participants de ce fil, mais sans le nom de leur auteur. Tes messages privés, tes liens d'amitié, tes blocages et tes signalements sont effacés avec ton compte.</li>
@@ -176,6 +182,14 @@
     <p><b>Les groupes de MyPadelChamp.</b> Nous pouvons ouvrir un groupe pour les joueurs d'une même file d'attente, d'une même poule, d'un même niveau ou d'une même zone, ou pour les joueurs sans équipe. Tu y es ajouté d'office, tu y lis tout l'historique du groupe, et tu peux le quitter à tout moment : tu n'y es alors plus réinscrit. MyPadelChamp y écrit sous son nom, à la main ou par des messages programmés, et peut masquer un message, dont le texte ne reste alors lisible que de la modération.</p>
     <p><b>Les groupes d'un coach.</b> Un coach peut réunir en groupe des joueurs qui le suivent ou ont réservé un cours chez lui. Tu y entres en acceptant son invitation, et les règles d'un groupe de joueurs s'appliquent. Le groupe se ferme quand le coach s'en va, et MyPadelChamp peut le fermer pour la modération.</p>
     <p><b>Les demandes de message.</b> Tu peux écrire à n'importe quel joueur. Si vous n'êtes pas amis, ne vous êtes pas croisés en match, ni défiés, ni liés par un coach, ton premier message lui arrive comme une demande, et rien d'autre ne passe tant qu'il ne l'a pas acceptée. S'il la refuse, nous ne te le disons pas : la demande expire au bout de trente jours, et tu peux alors en envoyer une nouvelle. Accepter ouvre la conversation, pas l'amitié. Un blocage, dans un sens ou dans l'autre, ferme la conversation comme la demande. Être dans le même groupe ne permet pas de s'écrire en privé.</p>
+  </section>
+
+  <section class="carte">
+    <h2 id="nous-ecrire">Quand tu nous écris dans l'application</h2>
+    <p>Tu as dans l'application une conversation avec MyPadelChamp, sous Tes joueurs. Elle s'ouvre la première fois que tu ouvres l'application, avec un message d'accueil qui ne déclenche aucune notification. Tu peux la quitter à tout moment, et elle ne se rouvre pas d'elle-même.</p>
+    <p><b>Qui lit tes messages.</b> Les administrateurs de MyPadelChamp, dans l'application et dans leur outil de gestion. Quand tu écris, le compte de l'organisation reçoit une notification qui porte ton nom et le début de ton message. Pour suivre ta demande, nous donnons à ta conversation un statut (nouvelle, en cours, réglée) et un sujet (planifier un match, score, paiement, compte et application, règlement, autre). Tu ne les vois pas, et ils sont effacés avec ton compte. Le texte de tes messages suit alors la règle des fils de groupe, écrite <a href="#apres-suppression">plus haut</a>.</p>
+    <p><b>L'analyse avec Claude.</b> Pour repérer les questions qui reviennent et améliorer le service, nous pouvons exporter les messages de ces conversations, avec nos réponses, et les analyser avec Claude, l'assistant d'Anthropic. L'export ne porte ni ton nom ni l'identifiant de ton compte : chaque joueur y devient un code, toujours le même (par exemple J-014). Les noms que tu écris toi-même dans un message y restent. Cet export n'est donc pas anonyme, et nous le traitons comme une donnée te concernant. Anthropic agit comme notre sous-traitant et ses conditions lui interdisent d'entraîner ses modèles sur ces données. Le fichier et la conversation d'analyse sont supprimés de notre côté au plus tard trente jours après l'export, puis effacés des serveurs d'Anthropic sous trente jours. Après la suppression de ton compte, tes messages n'entrent plus dans aucun export.</p>
+    <p>Cette analyse repose sur notre intérêt légitime à améliorer le service (article 6.1.f du RGPD). Tu peux t'y opposer en écrivant à <a href="mailto:contact@mypadelchamp.com">contact@mypadelchamp.com</a> depuis l'adresse de ton compte : tes messages sont alors retirés des exports suivants. Répondre à tes messages, lui, fait partie du service (article 6.1.b).</p>
   </section>
 
   <section class="carte">
@@ -210,7 +224,7 @@
       <li><b>Pas de mot de passe.</b> La connexion se fait par lien à usage unique envoyé par courriel : il n'y a aucun mot de passe à voler ou à deviner.</li>
       <li><b>Chiffrement en transit et au repos,</b> assuré par l'infrastructure de notre hébergeur.</li>
       <li><b>Sauvegardes automatiques quotidiennes</b> de la base de données.</li>
-      <li><b>Accès d'administration limité</b> à un seul compte à ce jour, protégé par un second facteur d'authentification en plus du lien de connexion.</li>
+      <li><b>Accès d'administration réservé</b> aux personnes qui gèrent MyPadelChamp. Dans notre outil de gestion, lire ou modifier les conversations, les groupes et les équipes, et modifier un profil, exige un second facteur d'authentification en plus du lien de connexion. Les écrans d'administration de l'application n'exigent encore que le lien de connexion.</li>
       <li>L'application comporte des écrans réservés à l'administration, accessibles uniquement aux comptes qui portent ce rôle en base.</li>
     </ul>
   </section>
@@ -235,7 +249,7 @@
       <a href="cgu-cgv.html">Conditions générales</a>
       <a href="suppression-de-compte.html">Supprimer mon compte</a>
     </nav>
-    <p>Dernière mise à jour : 9 octobre 2026. L'historique des versions de cette page est public : chaque modification est horodatée dans <a href="https://github.com/caleo22/mypadelchamp-site">le dépôt du site</a>, que tu peux consulter sans nous le demander.</p>
+    <p>Dernière mise à jour : 11 octobre 2026. L'historique des versions de cette page est public : chaque modification est horodatée dans <a href="https://github.com/caleo22/mypadelchamp-site">le dépôt du site</a>, que tu peux consulter sans nous le demander.</p>
   </footer>
 
 </div>
