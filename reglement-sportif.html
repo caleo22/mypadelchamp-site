@@ -4,26 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Règlement sportif, MyPadelChamp</title>
-<meta name="description" content="Le règlement sportif des championnats MyPadelChamp : paliers et divisions, rencontres, feuilles de score, forfaits et classement.">
+<meta name="description" content="Le règlement sportif des championnats MyPadelChamp : divisions et ligues, rencontres, feuilles de score, forfaits et classement.">
 <link rel="canonical" href="https://mypadelchamp.com/reglement-sportif">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="marque/blason.svg" type="image/svg+xml">
 <!--
   Fait partie intégrante des Conditions générales : les règles ci-dessous doivent rester identiques
-  à celles appliquées par le code, pas l'inverse. Réécrite le 2026-09-12 sur une confrontation ligne
-  à ligne au code du produit, consignée dans le dépôt privé (registre de confrontation du 12/09).
+  à celles appliquées par le code, pas l'inverse. Réécrite le 2026-10-20 (S46) sur une confrontation
+  au code en production ce jour-là : lundi de départ et absence (S66 lot 1), super tie-break compté
+  1-0 et barème par poule (S67), en plus de la version du 12/09.
 
-  Sources : `_shared/paliers.ts` (palier = niveau d'équipe tronqué, cinq divisions, entrée en 5),
-  `league-launcher/logic.ts` (TAILLE_POULE = 6, aller-retour, dix journées, repartirLancement,
-  issuesDeFinDeSaison), `_shared/cadence.ts` (cinq jours entre deux matchs), `_shared/escalade.ts`
-  (H+12, H+18, H+24, H+36 litige, H+48 tapis vert), `_shared/echeance-feuilles.ts` (lendemain 19 h),
-  `score-engine/logic.ts` (barème 3, 1, 0 ; départage du 2026-08-15), `app_settings`
-  (championnat_places_montee et _descente = 2).
+  Sources : `_shared/paliers.ts` (Division nommée, cinq ligues, entrée en Ligue 5, conversion du
+  14/12), `league-launcher/logic.ts` (datesDeLaPoule, repartirLancement, issuesDeFinDeSaison),
+  `cron-processor/logic.ts` (ouverture des journées, composerLaJournee, rencontreEngagee,
+  equipesAbsentes, clôture à date), `_shared/cadence.ts` (cinq jours), `_shared/escalade.ts` et
+  `_shared/pont.ts` (paliers, pont jusqu'au 2026-11-30), `_shared/echeance-feuilles.ts` (lendemain
+  19 h), `score-engine/logic.ts` (troisiemeSetAuVainqueur, barèmes 3-1-0 et 4-2-1-0, nul, départage),
+  `admin-equipes` (composition avant lancement, refus après), `_shared/categories.ts`.
 
-  Ce qui, dans cette page, n'est PAS appliqué par le code et relève d'une décision humaine de
-  MyPadelChamp : le contrôle du remplaçant, le report de match, le forfait pour annulation tardive,
-  les forfaits répétés, les sanctions, l'exclusion, la clôture de la ligue. Ces règles sont écrites
-  au présent de l'engagement (« MyPadelChamp constate », « peut »), jamais comme un automatisme.
+  Ce qui n'est PAS appliqué par le code et relève d'une décision humaine de MyPadelChamp : le
+  contrôle du remplaçant, le report de match, le forfait pour annulation tardive, la reprise d'une
+  rencontre interrompue et le nul, les forfaits répétés, les sanctions, l'exclusion, le litige et la
+  rencontre sans feuille, l'accord des équipes engagées avant cette version.
 -->
 </head>
 <body>
@@ -36,38 +38,63 @@
   </div>
 
   <h1>Règlement sportif</h1>
-  <p>Ce règlement dit comment se jouent les championnats MyPadelChamp : paliers et divisions, rencontres, feuilles de score, forfaits et classement. Il fait partie du contrat qui te lie à MyPadelChamp dès que tu t'inscris à un championnat.</p>
+  <p>Ce règlement dit comment se jouent les championnats MyPadelChamp : divisions et ligues, rencontres, feuilles de score, forfaits et classement. Il fait partie du contrat qui te lie à MyPadelChamp dès que tu t'inscris à un championnat. Il remplace la version du 12 septembre 2026 ; ce qui s'applique aux championnats engagés avant sa publication est écrit à l'article Transition.</p>
 
   <section class="carte">
     <h2>Le principe : une file d'attente, des poules de six</h2>
-    <p>Il n'y a pas de date de rentrée nationale. Ton équipe entre dans la file d'attente de sa zone, et une poule part dès que six équipes y sont réunies. Une poule compte toujours six équipes : chacune affronte les cinq autres deux fois, aller et retour, sur dix journées, une par semaine.</p>
-    <h3>Paliers et divisions</h3>
-    <p>Les équipes sont classées par palier, de 1 à 10. Ton palier est la partie entière du niveau de ton équipe : une équipe à 5,8 joue au palier 5. Chaque palier compte cinq divisions, la division 1 étant la plus forte. Une équipe qui s'engage pour la première fois entre en division 5 de son palier, la plus prudente. Quand une file compte plus d'une poule, les six équipes les plus faibles restent dans leur division et les autres montent d'une division.</p>
-    <h3>La catégorie</h3>
-    <p>Le championnat se joue en catégorie Open, ouverte à toute composition d'équipe. D'autres catégories s'ouvriront et seront annoncées ici.</p>
+    <p>Il n'y a pas de date de rentrée nationale. Ton équipe entre dans la file d'attente de sa zone, et une poule part dès que six équipes y sont réunies. Une poule compte toujours six équipes : chacune affronte les cinq autres deux fois, sur dix journées, une par semaine. Les cinq premières journées sont les matchs aller, les cinq suivantes les matchs retour. Deux semaines de rattrapage suivent la dixième journée.</p>
+    <h3>Divisions et ligues</h3>
+    <p>Les équipes sont classées par division. Ta division est la partie entière du niveau de ton équipe, et elle porte le nom du niveau de la grille de l'application : une équipe à 5,8 joue en Confirmé.</p>
+    <table class="mentions">
+      <tbody>
+        <tr><th>1</th><td>Débutant</td></tr>
+        <tr><th>2</th><td>Débutant+</td></tr>
+        <tr><th>3</th><td>Élémentaire</td></tr>
+        <tr><th>4</th><td>Intermédiaire</td></tr>
+        <tr><th>5</th><td>Confirmé</td></tr>
+        <tr><th>6</th><td>Avancé</td></tr>
+        <tr><th>7</th><td>Avancé+</td></tr>
+        <tr><th>8</th><td>Expert</td></tr>
+        <tr><th>9</th><td>Expert+</td></tr>
+        <tr><th>10</th><td>Élite</td></tr>
+      </tbody>
+    </table>
+    <p>Chaque division compte cinq ligues, la Ligue 1 étant la plus forte : ta poule se lit par exemple « Confirmé · Ligue 5 ». Une équipe qui s'engage pour la première fois entre en Ligue 5 de sa division, la plus prudente. Quand une file réunit assez d'équipes pour plus d'une poule, elles partent dans l'ordre d'arrivée, par poules de six : les six équipes au niveau le plus faible jouent dans la ligue de la file, les autres passent dans la file de la ligue au-dessus. En Ligue 1, rien ne passe au-dessus.</p>
+    <h3>Les catégories</h3>
+    <p>Le championnat se joue en catégorie Open, ouverte à toute composition d'équipe, et en catégorie Féminin, entre équipes de deux joueuses. Une équipe de deux joueurs peut demander, en s'inscrivant, à jouer en poule masculine, sans équipe qui compte une joueuse. MyPadelChamp peut aussi composer une poule Mixte, entre équipes d'un joueur et d'une joueuse.</p>
   </section>
 
   <section class="carte">
     <h2>Constituer une équipe</h2>
     <p>Une équipe compte deux titulaires. Elle peut désigner un remplaçant, qui doit avoir un compte MyPadelChamp actif et un niveau qui n'excède pas celui du plus faible des deux titulaires. Un joueur ne peut appartenir qu'à une seule équipe dans une même file d'attente.</p>
-    <p>À la formation, le niveau de l'équipe est la moyenne des niveaux de ses deux titulaires. Il évolue ensuite avec les résultats de l'équipe, match après match. C'est lui qui fixe le palier. L'équipe n'entre en file d'attente qu'une fois les deux Pass acquis.</p>
+    <p>À la formation, le niveau de l'équipe est la moyenne des niveaux de ses deux titulaires. Il évolue ensuite avec les résultats de l'équipe, match après match. C'est lui qui fixe la division. L'équipe n'entre en file d'attente qu'une fois les deux Pass acquis.</p>
   </section>
 
   <section class="carte">
     <h2>Lancer une poule</h2>
-    <p>Une poule part quand six équipes de la même zone, du même palier et de la même division sont en file, dans l'ordre d'arrivée. MyPadelChamp lance la poule ; la première journée s'ouvre à la date fixée au lancement, puis une journée par semaine. En dessous de six équipes, rien ne se lance : ton équipe reste en file, informée de sa position, et si aucune poule ne se forme avant l'expiration du Pass, il est remboursé intégralement dans les conditions des conditions générales.</p>
+    <p>Une poule part quand six équipes de la même zone, de la même catégorie, de la même division et de la même ligue sont en file, dans l'ordre d'arrivée. MyPadelChamp compose les poules et lance chacune d'elles. Avant le lancement, il peut corriger le niveau d'une équipe ou la placer dans une poule, pour un motif écrit. Une fois lancée, une poule ne change plus d'équipe.</p>
+    <p>La journée 1 s'ouvre le lundi qui suit le lancement, à 0 h, puis une journée s'ouvre chaque lundi. En dessous de six équipes, rien ne se lance : ton équipe reste en file, informée de sa position, et si aucune poule ne se forme avant l'expiration du Pass, il est remboursé intégralement dans les conditions des conditions générales.</p>
   </section>
 
   <section class="carte">
     <h2>Le déroulement d'une rencontre</h2>
-    <p>Chaque journée, les quatre joueurs fixent ensemble la date et le court dans le fil du match. Deux rencontres de championnat d'une même équipe sont espacées d'au moins cinq jours.</p>
-    <p>Chaque rencontre se joue en deux sets gagnants. À un set partout, le troisième set se joue en entier, avec un jeu décisif à sept points en cas d'égalité à six jeux partout : il n'y a jamais de super tie-break en dix points à la place du troisième set, pour que la rencontre se conclue sur le terrain. Les jeux du troisième set comptent au classement comme ceux des deux premiers.</p>
+    <p>Une journée va du lundi 0 h au dimanche minuit : c'est la semaine prévue pour sa rencontre, qui peut toutefois être calée plus tard, avant la fin de la poule. À son ouverture, l'application choisit l'adversaire de chaque équipe d'après les calendriers des quatre titulaires : parmi les rencontres qui restent à jouer dans la phase en cours, aller ou retour, celles qui offrent le plus de créneaux communs dans la semaine passent en premier. L'adversaire annoncé avant l'ouverture peut donc changer. Une rencontre déjà calée, ou dont la planification a commencé dans le fil du match, ne change plus de journée.</p>
+    <p>Les quatre joueurs fixent ensemble la date et le court dans le fil du match. Deux rencontres de championnat d'une même équipe sont espacées d'au moins cinq jours.</p>
+    <h3>Une semaine d'absence</h3>
+    <p>Ton équipe peut déclarer une semaine d'absence : il suffit qu'un titulaire indique dans l'application qu'il ne peut pas jouer cette semaine-là. L'absence vaut pour la journée qui contient le lundi de cette semaine. La rencontre de cette journée garde son adversaire, qui n'en reçoit pas d'autre, et part au rattrapage quand la semaine se referme : elle se joue ensuite, avant la fin de la poule, sans la règle des cinq jours entre deux rencontres. Si elle n'est pas jouée à temps, l'équipe absente la perd par forfait ; si les deux équipes avaient déclaré leur absence, le match est perdu par les deux, zéro point chacune.</p>
+    <p>Une équipe peut déclarer deux semaines d'absence au plus dans sa poule. À la troisième, la rencontre de cette semaine est perdue par forfait dès que la semaine se referme. Si les deux équipes sont absentes la même semaine et que l'une a déjà déclaré ses deux semaines, le match est perdu par les deux, zéro point chacune.</p>
+    <h3>La fin de la semaine</h3>
+    <p>Quand la journée suivante s'ouvre, une rencontre encore sans date et sans absence déclarée reçoit un dernier avertissement. Quarante-huit heures plus tard, si elle n'est toujours pas calée, l'équipe dont aucun titulaire n'a ni donné ses disponibilités de la semaine ni écrit dans le fil du match la perd par forfait. Si les deux équipes l'ont fait, la rencontre part au rattrapage ; si aucune ne l'a fait, le match est perdu par les deux, zéro point chacune. La dernière journée n'a pas de journée suivante : c'est la fin de la poule qui la tranche.</p>
+    <h3>Le format</h3>
+    <p>Chaque rencontre se joue en deux sets gagnants, au point décisif : à quarante partout, le point suivant décide du jeu. À un set partout, le troisième set est un super tie-break : la première équipe à dix points l'emporte, avec deux points d'écart, au-delà de dix s'il le faut. La feuille de score le note au vainqueur, un à zéro, et il compte au classement comme un set gagné, un jeu à zéro.</p>
+    <p>Une rencontre interrompue, faute de temps sur le créneau ou pour toute autre raison, reprend au score atteint dans les sept jours. Si elle était à un set partout et ne peut pas reprendre dans ce délai, les deux équipes peuvent la déclarer nulle à MyPadelChamp, qui valide ou non ce match nul. C'est le seul cas de match nul. Dans tout autre cas, MyPadelChamp tranche au vu des éléments du fil du match.</p>
     <p>MyPadelChamp met les équipes en relation et propose des créneaux communs, mais ne réserve aucun terrain : la réservation et son règlement auprès du club relèvent des joueurs, y compris en cas d'annulation ou de litige avec le club.</p>
     <table class="mentions">
       <tbody>
-        <tr><th>Victoire</th><td>3 points</td></tr>
+        <tr><th>Victoire</th><td>4 points</td></tr>
+        <tr><th>Match nul</th><td>2 points pour chaque équipe</td></tr>
         <tr><th>Défaite</th><td>1 point</td></tr>
-        <tr><th>Forfait</th><td>0 point pour l'équipe forfait, la victoire pour l'autre</td></tr>
+        <tr><th>Forfait</th><td>0 point pour l'équipe forfait, la victoire pour l'autre ; sans rencontre jouée, elle compte 6-0 6-0</td></tr>
         <tr><th>Tapis vert</th><td>0 point pour les deux équipes</td></tr>
       </tbody>
     </table>
@@ -75,7 +102,7 @@
 
   <section class="carte">
     <h2>Rendre et valider le score</h2>
-    <p>Après la rencontre, chacun des quatre joueurs remplit sa feuille de score dans l'application. Quand les feuilles des deux camps concordent, le score est validé. L'échéance est le lendemain du match à 19 h : à cette heure, si un camp n'a rendu aucune feuille, la feuille de l'autre camp fait foi et le camp silencieux est déclaré forfait. Si les deux camps ont rendu des feuilles qui ne concordent pas, MyPadelChamp arbitre au vu des éléments transmis ; sa décision est souveraine dans l'ordre sportif interne à l'application. Rendre volontairement un score faux est un manquement grave.</p>
+    <p>Après la rencontre, chacun des quatre joueurs remplit sa feuille de score dans l'application. Quand les feuilles des deux camps concordent, le score est validé. L'échéance est le lendemain du match à 19 h : à cette heure, si un camp n'a rendu aucune feuille, la feuille de l'autre camp fait foi et le camp silencieux est déclaré forfait. Si aucun des deux camps n'a rendu de feuille, la rencontre reste en attente et MyPadelChamp la tranche, comme un litige. Si les deux camps ont rendu des feuilles qui ne concordent pas, MyPadelChamp arbitre au vu des éléments transmis ; sa décision est souveraine dans l'ordre sportif interne à l'application. Rendre volontairement un score faux est un manquement grave.</p>
   </section>
 
   <section class="carte">
@@ -87,17 +114,17 @@
     <h2>Report et forfait</h2>
     <p>Une demande de report faite au moins vingt-quatre heures avant l'horaire convenu est de droit, l'équipe adverse ne peut pas la refuser : les deux équipes conviennent alors d'un nouveau créneau dans le fil du match, avant le terme du championnat.</p>
     <p>Toute annulation à moins de vingt-quatre heures de l'horaire convenu, comme toute absence non annoncée, vaut forfait de l'équipe défaillante, constaté par MyPadelChamp sur les éléments du fil du match : elle ne marque aucun point, l'équipe adverse reçoit les points de la victoire.</p>
-    <h3>Silence de l'équipe : cinq paliers</h3>
-    <p>Quand une rencontre ne se planifie pas faute de réponse, l'escalade suit cinq paliers automatiques, comptés depuis le dernier geste dans le fil du match et jamais avant l'ouverture de la journée, chacun laissant une trace dans le fil :</p>
+    <h3>Une rencontre qui ne se planifie pas : quatre paliers</h3>
+    <p>Quand l'application constate, après l'ouverture de la journée, qu'une rencontre ne se planifie pas (disponibilités manquantes, aucun créneau commun, semaine déclarée indisponible), l'escalade suit quatre paliers automatiques. Ils se comptent depuis ce constat ou depuis la dernière proposition de créneau dans le fil du match, jamais avant l'ouverture de la journée, et chacun laisse une trace dans le fil :</p>
     <table class="mentions">
       <tbody>
-        <tr><th>H+12</th><td>Relance du capitaine silencieux</td></tr>
-        <tr><th>H+18</th><td>Élargissement à toute l'équipe (adjoint, partenaire, remplaçant)</td></tr>
+        <tr><th>H+12</th><td>Relance des titulaires des deux équipes</td></tr>
+        <tr><th>H+18</th><td>Élargissement à toute l'équipe (adjoint, remplaçant)</td></tr>
         <tr><th>H+24</th><td>Avertissement daté, visible des deux équipes</td></tr>
         <tr><th>H+36</th><td>Ouverture d'un litige, que MyPadelChamp peut trancher</td></tr>
-        <tr><th>H+48</th><td>Tapis vert : faute de date trouvée, le match est perdu par les deux équipes, zéro point chacune, sans intervention humaine</td></tr>
       </tbody>
     </table>
+    <p>L'escalade ne fait perdre aucun match : ce sont la fin de la semaine et la fin de la poule qui tranchent. Jusqu'au 30 novembre 2026 inclus, elle ne démarre pas : une rencontre sans date reçoit un rappel. Elle reprend le 1er décembre 2026.</p>
     <p>Les forfaits répétés faussent le championnat pour tous les participants : MyPadelChamp notifie un avertissement dès le deuxième forfait constaté, et le troisième entraîne l'exclusion. L'équipe dispose de huit jours à compter de la notification pour la contester par écrit à <a href="mailto:contact@mypadelchamp.com">contact@mypadelchamp.com</a> ; la décision finale de MyPadelChamp en garde la trace. Les résultats déjà acquis restent, les rencontres qui lui restaient à jouer sont attribuées en forfait gagnant à ses adversaires pour préserver le classement des autres équipes, et l'exclusion emporte la perte du Pass sans remboursement, sans empêcher une inscription ultérieure moyennant un nouveau Pass.</p>
   </section>
 
@@ -110,8 +137,11 @@
   <section class="carte">
     <h2>Classement, montées et descentes</h2>
     <p>Le classement se fait au total de points. À égalité, les équipes concernées sont départagées sur les seules rencontres qu'elles ont jouées entre elles : leurs points, puis leurs jeux. À deux équipes, c'est la confrontation directe, et si chacune a gagné une fois, les jeux de ces deux matchs. Si l'égalité tient encore, la différence de sets, puis celle de jeux, sur toute la saison.</p>
-    <p>À la fin des dix journées, les deux premières de la division montent et les deux dernières descendent. L'échelle est unique : la division 1 d'un palier mène à la division 5 du palier au-dessus, la division 5 mène à la division 1 du palier au-dessous. Aux deux bouts de l'échelle, division 1 du palier 10 et division 5 du palier 1, l'équipe se maintient. La montée et la descente s'appliquent dès la première saison, et le rang gagné reste à l'équipe.</p>
-    <p>Le championnat se termine à l'issue de la dernière journée ; MyPadelChamp clôt alors la poule et le classement devient définitif.</p>
+    <h3>La fin de la poule</h3>
+    <p>La poule se termine au lendemain de sa dernière semaine de rattrapage. Trois jours avant, l'application prévient les équipes d'une rencontre encore sans date, ou calée après ce terme. Si elle n'est pas jouée au terme, elle est tranchée ce jour-là à 8 h : forfait de l'équipe absente ou restée sans réponse, selon les règles de l'article Le déroulement d'une rencontre, sinon zéro point pour les deux. Un litige ou une rencontre sans feuille restent à MyPadelChamp, qui les tranche ; la poule est close quand toutes ses rencontres ont une issue, et le classement devient alors définitif.</p>
+    <h3>Monter et descendre</h3>
+    <p>À la clôture, les deux premières montent d'une ligue et les deux dernières descendent d'une ligue. L'échelle est unique : la Ligue 1 d'une division mène à la Ligue 5 de la division au-dessus, la Ligue 5 mène à la Ligue 1 de la division au-dessous. Aux deux bouts de l'échelle, Ligue 1 d'Élite et Ligue 5 de Débutant, l'équipe se maintient. La montée et la descente s'appliquent dès la première saison, et le rang gagné reste à l'équipe.</p>
+    <p>Le 14 décembre 2026, un nouveau règlement entre en vigueur pour les championnats engagés à partir de cette date, avec trois ligues par division. Il sera publié au plus tard le 29 novembre 2026 et dira comment le rang gagné sous ce règlement-ci est converti.</p>
   </section>
 
   <section class="carte">
@@ -122,12 +152,23 @@
   <section class="carte">
     <h2>Le Mode Loisir</h2>
     <p>Le Mode Loisir organise des rencontres amicales, hors championnat, de deux façons : le match libre, où ton équipe se positionne sur un créneau et l'application lui trouve une équipe adverse de niveau comparable, et le mode défi, où ton équipe désigne l'adversaire ou demande à l'application de lui en désigner un, l'équipe sollicitée devant accepter explicitement.</p>
-    <p>Une rencontre amicale ne compte jamais au classement du championnat. Elle compte au classement de progression quand l'écart de niveau entre les deux équipes le permet et que les deux sont inscrites en Mode Loisir. Les badges de style se gagnent par les votes de tes adversaires, en championnat comme en Mode Loisir, dans les mêmes conditions d'écart de niveau. Le fanion de l'équipe se choisit à sa création : il ne se gagne pas.</p>
+    <p>Une rencontre amicale ne compte jamais au classement du championnat. Elle compte au classement de progression quand l'écart de niveau entre les deux équipes le permet et que les deux sont inscrites en Mode Loisir. Une équipe qui a déjà joué une poule de championnat, ou qui en attend une, ne voit bouger ni son niveau ni celui de ses joueurs en match amical. Les badges de style se gagnent par les votes de tes adversaires, en championnat comme en Mode Loisir, dans les mêmes conditions d'écart de niveau. Le fanion de l'équipe se choisit à sa création : il ne se gagne pas.</p>
+  </section>
+
+  <section class="carte">
+    <h2>Transition</h2>
+    <p>Ce règlement s'applique à toute équipe entrée en file à partir du 21 octobre 2026. Pour les championnats engagés avant :</p>
+    <ul>
+      <li><b>Le super tie-break et le point décisif</b> s'appliquent à toutes les poules, pour toute rencontre dont le score est saisi à partir du 20 octobre 2026. Des rencontres ne pouvaient pas finir leur troisième set dans des créneaux de quatre-vingt-dix minutes, la durée de tous les créneaux que les clubs proposent : c'est la nécessité impérieuse prévue à l'article Modifier ce règlement. Un troisième set saisi avant cette date reste compté tel qu'il a été joué.</li>
+      <li><b>Les règles d'absence, de fin de semaine et de fin de poule</b> s'appliquent à toutes les poules à partir du 2 novembre 2026, date à laquelle la semaine se referme pour la première fois. Sans elles, une équipe absente ou silencieuse faisait perdre le match aux deux équipes, et ces poules ne pouvaient pas finir leur saison sans pénaliser celle qui avait répondu : c'est la nécessité impérieuse prévue à l'article Modifier ce règlement. Les poules lancées le 9 et le 18 octobre n'ont pas de semaines de rattrapage : leurs rencontres reportées se jouent d'ici leur dernier jour, le 17 décembre et le 26 décembre 2026.</li>
+      <li><b>Les cinq poules lancées le 9 octobre 2026</b> jouent pour le reste sous le règlement du 12 septembre 2026 : leurs journées s'ouvrent le vendredi, et leur barème reste victoire 3 points, défaite 1, forfait 0. Un match nul, dans le seul cas prévu à l'article Le déroulement d'une rencontre, y vaut 1 point pour chaque équipe et passe devant une défaite à égalité de points.</li>
+      <li><b>Les deux poules lancées le 18 octobre 2026, et les équipes déjà en file à la publication de ce règlement,</b> jouent sous ce règlement, barème compris, si elles l'acceptent : MyPadelChamp le leur présente, et chaque équipe donne son accord par écrit. Une poule du 18 octobre dont toutes les équipes n'ont pas accepté garde le barème du 12 septembre. Une équipe en file qui n'accepte pas est remboursée intégralement de ses Pass avant le lancement de sa poule. Les journées des poules du 18 octobre s'ouvrent le dimanche.</li>
+    </ul>
   </section>
 
   <section class="carte">
     <h2>Modifier ce règlement</h2>
-    <p>MyPadelChamp peut faire évoluer ce règlement. Toute modification substantielle t'est signalée dans l'application ou par courriel, dans les mêmes conditions que les conditions générales. Aucune modification ne s'applique à un championnat déjà engagé, sauf accord unanime des équipes concernées ou nécessité impérieuse.</p>
+    <p>MyPadelChamp peut faire évoluer ce règlement. Toute modification substantielle t'est signalée dans l'application ou par courriel, au moins quinze jours avant son entrée en vigueur, dans les mêmes conditions que les conditions générales. Aucune modification ne s'applique à un championnat déjà engagé, sauf accord unanime des équipes concernées ou nécessité impérieuse.</p>
   </section>
 
   <footer class="pied">
@@ -138,7 +179,7 @@
       <a href="cgu-cgv.html">Conditions générales</a>
       <a href="suppression-de-compte.html">Supprimer mon compte</a>
     </nav>
-    <p>Dernière mise à jour : 12 septembre 2026.</p>
+    <p>Dernière mise à jour : 21 octobre 2026.</p>
   </footer>
 
 </div>
