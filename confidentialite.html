@@ -55,7 +55,7 @@
       <li><b>Ta photo de profil,</b> si tu en ajoutes une.</li>
       <li><b>Ton niveau et son évolution :</b> le niveau que tu choisis à l'inscription, le niveau de départ que nous en tirons (ajusté par ton classement FFT seulement si tu te places au niveau 8 ou plus, voir plus bas), puis les valeurs calculées par le moteur de classement à chaque match validé. Si un coach certifie ton niveau : son prénom et la date de la certification, que les autres membres voient à côté de ton niveau.</li>
       <li><b>Ton classement FFT,</b> si tu confirmes dans l'application qu'une ligne du classement est la tienne : tes points, ton nombre de tournois, ton rang et leur évolution mois par mois. À partir de ces données publiées, nous calculons ton rang du dernier mois quand le document ne l'imprime pas (une estimation, dite comme telle), ton meilleur classement, ta place parmi les joueurs de France et de Corse selon tes points, l'évolution de tes points sur trois mois et le dernier classement où un nouveau résultat est entré. Les autres membres connectés voient tout cela sur ta fiche, et tes points dans la recherche de joueurs, y compris dans la liste des membres classés de ta zone. Sur ta fiche, ils ne voient rien si l'un de vous a bloqué l'autre. La licence que voient les autres n'affiche aucun classement.</li>
-      <li><b>Tes disponibilités</b> et tes clubs préférés, pour croiser les agendas des quatre joueurs avec les courts libres. Les joueurs de ta poule voient seulement si tu les as données, jamais leur contenu (voir <a href="#poule">plus bas</a>).</li>
+      <li><b>Tes disponibilités</b> et tes clubs préférés, pour croiser les agendas des quatre joueurs avec les courts libres. Les joueurs de ta poule voient seulement si tu les as données, jamais leur contenu (voir <a href="#poule">plus bas</a>). Dans la War Room d'un de tes matchs, les trois autres joueurs voient en plus, pour chaque créneau que l'application vous propose, si tu y es disponible, sous ton prénom. Quand aucun créneau ne vous convient, elle peut leur montrer le créneau le plus proche et leur dire combien de minutes il te manque pour y être disponible (une heure au plus). Ils ne voient jamais la liste de tes plages horaires.</li>
       <li><b>Ton équipe, tes matchs et tes scores.</b></li>
       <li><b>Les évaluations de niveau après un match :</b> tes adversaires peuvent dire si ton niveau leur a paru juste, au-dessus ou en dessous, et tu peux faire de même pour eux. Ces évaluations sont anonymes : chacun ne voit que les siennes, jamais celles qui le concernent. Elles sont effacées avec le compte de celui qui a évalué ou de celui qui a été évalué.</li>
       <li><b>Les votes de style après un match :</b> tes adversaires peuvent te reconnaître un style de jeu, un seul par match, et tu peux faire de même pour eux. Ces votes sont anonymes : chacun ne voit que les siens. Ils ne comptent que si l'écart de niveau entre les deux équipes le permettait au moment du match, et un même joueur ne peut te voter qu'une fois par période de trois mois. Leur cumul te fait gagner des badges de style, visibles des autres membres connectés ; tu choisis les trois que ta licence montre. Un badge gagné reste acquis, même si un votant supprime son compte ; les votes et tes badges sont effacés avec ton compte.</li>
@@ -161,6 +161,7 @@
     <p>Deux nuances, dites parce qu'elles sont vraies.</p>
     <ul>
       <li><b>Les pièces comptables liées à ton paiement</b> sont conservées dix ans par notre comptabilité et par notre prestataire de paiement, comme la loi l'exige. Cette conservation est indépendante de ton compte et survit à sa suppression.</li>
+      <li><b>Ta déclaration de rétractation,</b> si tu t'es rétracté d'un Pass, est conservée dix ans avec son remboursement, comme les pièces comptables de ton paiement : elle prouve la date de ta rétractation et ce qui t'a été rendu. Elle survit elle aussi à la suppression de ton compte.</li>
       <li><b>Les journaux techniques de notre hébergeur</b> (Supabase, plan gratuit) sont conservés 7 jours par l'hébergeur, indépendamment de ton compte.</li>
     </ul>
   </section>
@@ -174,6 +175,7 @@
       <li><b>Les scores validés et le classement</b> du championnat restent en place : les effacer réécrirait le championnat des autres équipes.</li>
       <li><b>Ton équipe</b> continue d'exister sans toi. Ses autres membres sont avertis de ton départ.</li>
     </ul>
+    <p>Si tu t'es rétracté d'un Pass, ta déclaration (ton nom, l'adresse de l'accusé de réception, le Pass visé, la date et l'heure) et son remboursement restent après la suppression de ton compte, avec ton nom : ils prouvent que ta rétractation a été reçue et remboursée. Ils reposent sur notre intérêt légitime à pouvoir en rendre compte (article 6.1.f du RGPD).</p>
     <p>Si tu administres MyPadelChamp, la trace de tes gestes d'administration (un Pass offert, crédité ou remboursé, une équipe retirée de la file, une relance envoyée aux joueurs) reste après la suppression de ton compte, avec l'identifiant de ton compte mais sans ton nom : elle justifie un paiement ou un remboursement. Elle repose sur notre intérêt légitime à pouvoir en rendre compte (article 6.1.f du RGPD).</p>
   </section>
 
@@ -184,7 +186,7 @@
 
   <section class="carte">
     <h2 id="poule">Ce que ta poule voit de tes disponibilités</h2>
-    <p>Avant chaque journée de championnat, les titulaires des équipes que la tienne doit encore affronter dans la moitié de saison en cours, l'aller puis le retour, voient ton prénom, le nom de ton équipe et si tu as donné ou non tes disponibilités pour la semaine de la prochaine journée. Ils voient un oui ou un non, rien d'autre : ni tes créneaux, ni si tu as répondu que tu ne pouvais pas jouer cette semaine-là. Une fois votre match calé, ils ne le voient plus. Un joueur que tu as bloqué, ou qui t'a bloqué, ne le voit pas.</p>
+    <p>Avant chaque journée de championnat, les titulaires des équipes que la tienne doit encore affronter dans la moitié de saison en cours, l'aller puis le retour, voient ton prénom, le nom de ton équipe et si tu as donné ou non tes disponibilités pour la semaine de la prochaine journée. Ils voient un oui ou un non, rien d'autre : ni tes créneaux, ni si tu as répondu que tu ne pouvais pas jouer cette semaine-là. Ce qu'en voient les trois autres joueurs d'un de tes matchs, dans sa War Room, est dit plus haut. Une fois votre match calé, ils ne le voient plus. Un joueur que tu as bloqué, ou qui t'a bloqué, ne le voit pas.</p>
     <p><b>Les rappels.</b> Si tu ne les as pas données, chacun de ces joueurs peut te le rappeler par une notification qui porte son prénom et le nom de son équipe. Tu en reçois au plus un par période de vingt-quatre heures, quel que soit le nombre de joueurs qui voudraient te relancer, et jamais d'un joueur que tu as bloqué ou qui t'a bloqué.</p>
     <p>Chaque rappel laisse une trace dans notre base : qui l'a envoyé, à qui, pour quelle poule et quelle semaine. Elle sert à tenir cette limite et à répondre à un joueur qui se plaindrait d'être relancé. Elle est effacée au bout de trente jours, ou avant si l'un de vous deux supprime son compte.</p>
     <p>Le statut et les rappels servent à caler vos matchs : ils relèvent de l'exécution du contrat (article 6.1.b du RGPD). La trace repose sur notre intérêt légitime à vérifier que le service n'est pas détourné (article 6.1.f).</p>
@@ -213,8 +215,11 @@
       <li><b>Ton lien de connexion,</b> chaque fois que tu le demandes.</li>
       <li><b>Le courriel du matin,</b> si l'application ne peut pas te prévenir sur ton téléphone : tu as refusé ses notifications, ton téléphone ne lui a jamais permis de t'en envoyer, tu les as coupées dans les réglages de MyPadelChamp, ou ta version de l'application est antérieure à la 1.0.2. Il reprend mot pour mot les notifications que tu n'as pas lues sur tes matchs, tes feuilles de match, ton équipe et ton championnat. Pour un message du fil de tes matchs, ou un message que MyPadelChamp écrit dans tes groupes, il donne le message en entier, là où la notification n'en montrait que le début. Il part au plus une fois par jour, vers 8 h, et seulement s'il a quelque chose à te dire. Un lien, au pied de chaque courriel du matin, l'arrête.</li>
       <li><b>Les messages de l'organisation</b> sur ton championnat : un match à caler, une règle qui change, le départ d'une poule. Ce lien ne les arrête pas : ils portent ce qu'il te faut pour jouer.</li>
+      <li><b>La confirmation de l'achat d'un Pass,</b> dès ton paiement : ce que tu as acheté, la fin de ton délai de rétractation, ton lien « Renoncer au contrat ici », le formulaire de rétractation, et nos conditions générales en pièce jointe.</li>
+      <li><b>Ton lien de rétractation,</b> quand tu le demandes sur <a href="renoncer.html">mypadelchamp.com/renoncer</a> : il ne part qu'à l'adresse de ton compte, et seulement si un Pass de ce compte est encore dans son délai.</li>
+      <li><b>L'accusé de réception de ta rétractation,</b> à l'adresse que tu indiques dans ta déclaration : ta déclaration, sa date et son heure, et ce qui t'est remboursé.</li>
     </ul>
-    <p><b>Ce que nous savons d'un courriel.</b> Nos courriels ne contiennent aucun pixel de suivi, et leurs liens ne passent par aucun service de mesure : nous ne savons pas si tu les ouvres. Nous voyons seulement, dans les trois jours, ce que tu as fait dans l'application (voir « L'ouverture de l'application », plus haut). Notre prestataire d'envoi nous dit seulement si un courriel a été remis, rejeté par ta messagerie ou signalé comme indésirable. Si ta messagerie rejette nos courriels, nous cessons de t'en envoyer jusqu'à ta prochaine connexion. Si tu signales l'un d'eux comme indésirable, nous ne t'envoyons plus que ton lien de connexion.</p>
+    <p><b>Ce que nous savons d'un courriel.</b> Nos courriels ne contiennent aucun pixel de suivi, et leurs liens ne passent par aucun service de mesure : nous ne savons pas si tu les ouvres. Nous voyons seulement, dans les trois jours, ce que tu as fait dans l'application (voir « L'ouverture de l'application », plus haut). Notre prestataire d'envoi nous dit seulement si un courriel a été remis, rejeté par ta messagerie ou signalé comme indésirable. Si ta messagerie rejette nos courriels, nous cessons de t'en envoyer jusqu'à ta prochaine connexion. Si tu signales l'un d'eux comme indésirable, nous ne t'envoyons plus que ton lien de connexion et les courriels liés à l'achat d'un Pass.</p>
     <p><b>Répondre.</b> Une réponse à nos courriels arrive à <a href="mailto:contact@mypadelchamp.com">contact@mypadelchamp.com</a>. Tu peux aussi nous écrire dans ta conversation MyPadelChamp, dans l'application.</p>
     <p><b>Combien de temps.</b> La trace de chaque envoi est effacée au bout de trente jours, ou avec ton compte. Le texte d'un message de l'organisation, le même pour tous ceux qui l'ont reçu, est effacé au bout de trente jours. Ton choix d'arrêter le courriel du matin est gardé tant que ton compte existe.</p>
     <p>Ces courriels font partie du service : leur base est l'exécution du contrat (article 6.1.b du RGPD).</p>
@@ -269,7 +274,7 @@
 
   <section class="carte">
     <h2>Cookies et traceurs</h2>
-    <p>Ce site n'utilise aucun cookie et n'exécute aucun traceur. Il ne charge aucune ressource extérieure : ses polices, ses images et sa feuille de style viennent de son propre domaine. C'est pourquoi aucune bannière ne t'est demandée. Nos courriels ne contiennent aucun traceur non plus (voir <a href="#courriels">plus haut</a>).</p>
+    <p>Ce site n'utilise aucun cookie et n'exécute aucun traceur. Il ne charge aucune ressource extérieure : ses polices, ses images et sa feuille de style viennent de son propre domaine. C'est pourquoi aucune bannière ne t'est demandée. Une seule page exécute un script, <a href="renoncer.html">mypadelchamp.com/renoncer</a>, pour ta rétractation : il n'envoie à notre serveur que ton lien de rétractation, et le nom et l'adresse que tu y saisis ; il ne pose aucun cookie et n'enregistre rien dans ton navigateur. Nos courriels ne contiennent aucun traceur non plus (voir <a href="#courriels">plus haut</a>).</p>
   </section>
 
   <footer class="pied">
@@ -280,7 +285,7 @@
       <a href="cgu-cgv.html">Conditions générales</a>
       <a href="suppression-de-compte.html">Supprimer mon compte</a>
     </nav>
-    <p>Dernière mise à jour : 23 octobre 2026. L'historique des versions de cette page est public : chaque modification est horodatée dans <a href="https://github.com/caleo22/mypadelchamp-site">le dépôt du site</a>, que tu peux consulter sans nous le demander.</p>
+    <p>Dernière mise à jour : 29 octobre 2026. L'historique des versions de cette page est public : chaque modification est horodatée dans <a href="https://github.com/caleo22/mypadelchamp-site">le dépôt du site</a>, que tu peux consulter sans nous le demander.</p>
   </footer>
 
 </div>

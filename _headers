@@ -18,6 +18,18 @@
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
 
+# La page de rétractation (S71b, R7) : la seule qui exécute un script, servi par le site lui-même, et qui parle au
+# serveur de MyPadelChamp. Toutes les autres pages gardent la politique ci-dessus. Un en-tête de règle plus précise
+# s'ajoute à celui de « /* » : la politique est donc REDÉFINIE en entier ici (deux en-têtes CSP s'intersecteraient).
+/renoncer
+  ! Content-Security-Policy
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src https://qsmncmzsmusemrlulhev.supabase.co; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  Cache-Control: no-store
+/renoncer.html
+  ! Content-Security-Policy
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src https://qsmncmzsmusemrlulhev.supabase.co; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  Cache-Control: no-store
+
 # Le lien universel de l'invitation (S14) : iOS lit ce fichier sans extension et exige du JSON.
 /.well-known/apple-app-site-association
   Content-Type: application/json

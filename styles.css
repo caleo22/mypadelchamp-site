@@ -336,7 +336,7 @@ a { color: var(--primaire); text-decoration: underline; text-underline-offset: 2
    le lien seul faisait 18 px de haut, la carte en fait 114. Précédent : les terrains de /app,
    liens de toute leur surface (`a.terrain`). */
 a.carte-lien { display: block; color: var(--texte); text-decoration: none; }
-a.carte-lien h2 { margin: 0; color: var(--primaire); }
+a.carte-lien h2, a.carte-lien h3 { margin: 0; color: var(--primaire); }
 a.carte-lien .note { margin-top: 8px; }
 a.carte-lien:focus-visible { outline: 3px solid var(--texte); outline-offset: 3px; }
 
@@ -667,3 +667,49 @@ a.terrain:focus-visible { outline: 3px solid var(--texte); outline-offset: 3px; 
 }
 
 .invitation { margin-bottom: 16px; }
+
+/* ===== La page /renoncer (S71b, planche G1 A validée le 25/10) =====
+   Le champ et le bouton sont ceux de l'app (`Input`, `Button` : 50 pt, rayon 12, dégradé de `theme.ts`) : le site
+   n'avait ni l'un ni l'autre. Portée limitée à la page, rien ne change ailleurs. Sans script, l'état « sans lien »
+   reste lisible et son formulaire se cache (il ne peut rien envoyer). */
+.avec-jeton [data-etat="sans_lien"] { display: none; }
+html:not(.js) .renoncer .recevoir { display: none; }
+.renoncer label { display: block; font-size: var(--t-caption); color: #5d6b81; margin: 14px 0 6px; }
+.renoncer .carte > label:first-child { margin-top: 0; }
+.renoncer .champ {
+  display: block;
+  width: 100%;
+  font: 15px 'DM Sans', system-ui, sans-serif;
+  color: var(--texte);
+  background: #ffffff;
+  border: 1px solid #dde5f0;
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+.renoncer .champ:focus-visible { outline: 3px solid var(--primaire); outline-offset: 1px; }
+.renoncer .bouton {
+  display: block;
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  border: 0;
+  border-radius: 12px;
+  color: #ffffff;
+  font: 700 17px 'Barlow Condensed', system-ui, sans-serif;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+}
+.renoncer .bouton.primaire { background: linear-gradient(90deg, #1366f0, #0a4fe0); }
+.renoncer .bouton:disabled { opacity: 0.5; cursor: default; }
+.renoncer .bouton:focus-visible { outline: 3px solid var(--texte); outline-offset: 3px; }
+.renoncer .sous-bouton { margin-top: 10px; font-size: var(--t-caption); color: rgba(18, 32, 54, 0.66); }
+.renoncer .declaration { font-size: 15px; line-height: 1.5; margin: 0; }
+.renoncer .erreur { margin-top: 10px; font-size: var(--t-base); color: #e63946; }
+
+/* L'impression (S71b : le PDF des CGV joint à la confirmation d'achat) : sans le grain plein écran, qui se rastérise
+   à chaque page et faisait peser le PDF plus de cent mégaoctets. */
+@media print {
+  body::before { display: none; }
+}

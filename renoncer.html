@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Renoncer au contrat ici, MyPadelChamp</title>
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="styles.css?v=20261026">
+<link rel="icon" href="marque/blason.svg" type="image/svg+xml">
+<!--
+  La fonction de rétractation du Pass, validée par Derek le 25/10.
+  Seule page du site qui exécute un script (R7) : `renoncer.js`, servi par le site, sans cookie ni stockage. Le lien
+  personnel porte son jeton dans le fragment (#…), jamais envoyé à l'hébergeur. Ouvrir la page n'écrit rien : seul
+  « Confirmer la rétractation » écrit. Sans script, l'état « sans lien » reste, avec le formulaire par courriel.
+-->
+<script src="renoncer.js?v=20261026"></script>
+</head>
+<body>
+
+<div class="page renoncer">
+
+  <div class="entete">
+    <img src="marque/blason.svg" alt="">
+    <a href="index.html">MyPadelChamp</a>
+  </div>
+
+  <!-- La déclaration -->
+  <section data-etat="declaration" hidden>
+    <h1>Te rétracter de ton Pass</h1>
+    <p>Vérifie ta déclaration, puis confirme-la. Tu as jusqu'au <span data-champ="fin-courte"></span> inclus.</p>
+    <form id="form-declaration" novalidate>
+      <div class="carte">
+        <p class="declaration" data-champ="declaration"></p>
+        <label for="nom">Ton nom et ton prénom</label>
+        <input class="champ" id="nom" name="nom" autocomplete="name" required minlength="2" maxlength="120">
+        <label for="adresse">L'adresse où recevoir l'accusé de réception</label>
+        <input class="champ" id="adresse" name="adresse" type="email" autocomplete="email" required maxlength="200">
+      </div>
+      <div class="carte">
+        <h3>Ce qui te revient</h3>
+        <p class="fait"><b data-champ="rembourse"></b> sur ta carte, au plus tard le <span data-champ="au-plus-tard"></span>.</p>
+        <p class="fait" data-champ="motif"></p>
+      </div>
+      <div class="carte">
+        <h3>Ton équipe</h3>
+        <p data-champ="equipe-phrase"></p>
+      </div>
+      <button class="bouton primaire" type="submit">Confirmer la rétractation</button>
+      <p class="sous-bouton">L'accusé de réception part aussitôt à l'adresse indiquée, avec ta déclaration, la date et l'heure.</p>
+      <p class="erreur" data-champ="erreur" hidden></p>
+    </form>
+  </section>
+
+  <!-- Après la confirmation -->
+  <section data-etat="enregistree" hidden>
+    <h1>Ta rétractation est enregistrée</h1>
+    <p>Reçue le <span data-champ="recue-le"></span>.</p>
+    <div class="carte">
+      <p class="fait" data-champ="argent"></p>
+      <p class="fait">L'accusé de réception est parti à <span data-champ="adresse-accuse"></span>.</p>
+      <p class="fait" data-champ="prevenu"></p>
+    </div>
+    <a class="carte carte-lien" href="mypadelchamp:///">
+      <h3>Revenir dans l'application</h3>
+      <p class="note">Si elle ne s'ouvre pas, ouvre-la depuis ton écran d'accueil.</p>
+    </a>
+  </section>
+
+  <!-- Le délai est passé -->
+  <section data-etat="delai_passe" hidden>
+    <h1>Le délai de rétractation est passé</h1>
+    <p>Il a pris fin le <span data-champ="fin-longue"></span> à minuit.</p>
+    <div class="carte">
+      <p>Un remboursement reste possible dans les cas prévus aux <a href="cgu-cgv.html">conditions générales</a>, par exemple si ta poule n'a pas été lancée. Écris-nous à contact@mypadelchamp.com.</p>
+    </div>
+  </section>
+
+  <!-- Déjà rétracté -->
+  <section data-etat="deja_retracte" hidden>
+    <h1 data-champ="deja-titre">Tu t'es déjà rétracté de ce Pass</h1>
+    <div class="carte">
+      <p class="fait">Rétractation reçue le <span data-champ="deja-recue-le"></span>.</p>
+      <p class="fait" data-champ="deja-argent"></p>
+    </div>
+    <p class="note">Une question : contact@mypadelchamp.com.</p>
+  </section>
+
+  <!-- Sans lien, ou lien périmé : l'état par défaut, lisible sans script -->
+  <section data-etat="sans_lien">
+    <h1>Renoncer au contrat ici</h1>
+    <p>Pour te rétracter de ton Pass, ouvre le lien de ton courriel de confirmation, ou touche « Renoncer au contrat ici » dans l'application.</p>
+    <form class="carte recevoir" id="form-lien" novalidate>
+      <label for="adresse-compte">L'adresse de ton compte MyPadelChamp</label>
+      <input class="champ" id="adresse-compte" name="adresse" type="email" autocomplete="email" required maxlength="200">
+      <button class="bouton primaire" type="submit">Recevoir mon lien</button>
+      <p class="sous-bouton">Si un Pass de ce compte est dans son délai, le lien part à cette adresse. Rien ne part sinon.</p>
+    </form>
+    <p class="note">Tu peux aussi nous envoyer le formulaire de rétractation des <a href="cgu-cgv.html">conditions générales</a> à contact@mypadelchamp.com.</p>
+  </section>
+
+</div>
+
+</body>
+</html>
