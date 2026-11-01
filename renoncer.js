@@ -25,7 +25,13 @@
       cache: "no-store",
     }).then(function (r) {
       return r.json().then(function (j) {
-        if (!r.ok) throw new Error((j && j.error) || ECHEC);
+        if (!r.ok) {
+          // Seule une phrase du serveur se montre ; le navigateur (« Failed to fetch ») et une réponse qui n'est pas
+          // du JSON rendent la phrase prévue (S81, PAS-115).
+          var e = new Error((j && j.error) || ECHEC);
+          e.duServeur = true;
+          throw e;
+        }
         return j;
       });
     });
@@ -159,7 +165,10 @@
     if (f.etat === "echec_remboursement") {
       texte("deja-argent", "Ton remboursement de " + euros(f.rembourse_centimes) + " part dans les quatorze jours : nous te l'écrivons dès qu'il est fait.");
     } else {
-      grasPuis("deja-argent", euros(f.rembourse_centimes), " remboursés sur ta carte le même jour.");
+      // S81b (S81-Q4) : le jour réel quand le passage horaire a remboursé un autre jour que la déclaration ; un serveur
+      // pas encore redéployé n'envoie pas le champ, et la phrase d'avant reste vraie le jour même.
+      grasPuis("deja-argent", euros(f.rembourse_centimes),
+        " remboursés sur ta carte le " + (f.rembourse_un_autre_jour || "même jour") + ".");
     }
     montrer("deja_retracte");
   }
@@ -189,7 +198,7 @@
         adresse: document.getElementById("adresse").value,
       }).then(afficher, function (err) {
         bouton.disabled = false;
-        erreur("erreur", err && err.message ? err.message : ECHEC);
+        erreur("erreur", err && err.duServeur ? err.message : ECHEC);
       });
     });
 
